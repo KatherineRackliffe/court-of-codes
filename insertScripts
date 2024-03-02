@@ -1,4 +1,4 @@
-INSERT INTO "USER" (UserID, EmailAddress, PasswordHash, Username, Salt)
+INSERT INTO "users" (UserID, EmailAddress, PasswordHash, Username, Salt)
 VALUES ('1234567', 'brandon@sanderson.com', '416f22b2185a96c8b4b07e4ba39ab1048657700ca4afcb49d45de73a994279db
 ', 'BrandonSanderson', 'stormlight')
 
