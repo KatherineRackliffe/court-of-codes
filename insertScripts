@@ -2,5 +2,5 @@ INSERT INTO "users" (UserID, EmailAddress, PasswordHash, Username, Salt)
 VALUES ('1234567', 'brandon@sanderson.com', '416f22b2185a96c8b4b07e4ba39ab1048657700ca4afcb49d45de73a994279db
 ', 'BrandonSanderson', 'stormlight')
 
-INSERT INTO "BOOK" (ISBN, BookTitle, BookCover, AutherFName, AutherLName, DatePublished, PageCount)
-VALUES ('148470567X', 'Ahsoka', 'ahsoka.png', 'E.K.', 'Johnston', '10/11/2016', '400');
+INSERT INTO "BOOK" (ISBN, BookTitle, AuthorFName, AuthorLName, DatePublished, PageCount)
+VALUES ('148470567X', 'Ahsoka', 'E.K.', 'Johnston', '10/11/2016', '400');
