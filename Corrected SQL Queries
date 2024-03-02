@@ -1,0 +1,9 @@
+CREATE TABLE Users
+(
+  UserID SERIAL NOT NULL,
+  EmailAddress VARCHAR NOT NULL,
+  PasswordHash INT NOT NULL,
+  Username VARCHAR NOT NULL,
+  Salt INT NOT NULL,
+  PRIMARY KEY (UserID)
+);
