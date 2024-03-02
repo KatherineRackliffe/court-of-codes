@@ -1,10 +1,10 @@
-CREATE TABLE Users
+CREATE TABLE users
 (
   UserID SERIAL NOT NULL,
   EmailAddress VARCHAR NOT NULL,
-  PasswordHash INT NOT NULL,
+  PasswordHash VARCHAR NOT NULL,
   Username VARCHAR NOT NULL,
-  Salt INT NOT NULL,
+  Salt VARCHAR NOT NULL,
   PRIMARY KEY (UserID)
 );
 CREATE TABLE UserList
@@ -19,6 +19,7 @@ CREATE TABLE Book
 (
   ISBN INT NOT NULL,
   BookTitle VARCHAR NOT NULL,
+  
   AuthorFName VARCHAR NOT NULL,
   AuthorLName VARCHAR NOT NULL,
   DatePublished DATE NOT NULL,
