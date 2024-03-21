@@ -1,0 +1,7 @@
+CREATE VIEW userShelfView AS
+SELECT UserName, ListName, ListID
+FROM USER
+INNER JOIN UserList ON User.UserID = UserList.UserID;
+
+# Later in our code, we could do the following to select a specific list, if we needed to:
+# SELECT * FROM userShelfView WHERE ListID = %s
