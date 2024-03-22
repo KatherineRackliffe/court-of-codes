@@ -5,3 +5,31 @@ INNER JOIN UserList ON User.UserID = UserList.UserID;
 
 # Later in our code, we could do the following to select a specific list, if we needed to:
 # SELECT * FROM userShelfView WHERE ListID = %s
+
+CREATE VIEW welcomePageView AS
+SELECT User.UserID, User.Username
+FROM User;
+
+CREATE VIEW homePageView AS
+SELECT Books.ISBN, Books.BookTitle, Books.BookCover, Books.AuthorFName, Books.AuthorLName, AVG(UserReview.NumericalReview) AS AverageReview
+FROM Books
+JOIN UserReview ON Books.ISBN = UserReview.ISBN
+GROUP BY Books.ISBN, Books.BookTitle, Books.BookCover, Books.AuthorFName, Books.AuthorLName;
+
+CREATE VIEW bookView AS
+SELECT Books.*, AVG(UserReview.NumericalReview) AS AverageReview, User.UserID, User.Username, Books.DatePublished
+FROM Books
+JOIN UserReview ON Books.ISBN = UserReview.ISBN
+JOIN User ON UserReview.UserID = User.UserID;
+
+CREATE VIEW userShelfView AS
+SELECT User.UserID, User.Username, UserList.ListName, UserList.ListID
+FROM User
+JOIN UserList ON User.UserID = UserList.UserID;
+
+CREATE VIEW userListView AS
+SELECT User.UserID, User.Username, UserList.ListName, UserList.ListID
+FROM User
+JOIN UserList ON User.UserID = UserList.UserID;
+
+
