@@ -7,7 +7,7 @@ INNER JOIN UserList ON User.UserID = UserList.UserID;
 # SELECT * FROM userShelfView WHERE ListID = %s
 
 CREATE VIEW welcomePageView AS
-SELECT User.UserID, User.Username
+SELECT User.UserID, User.Username # Not sure if we should add email addresses.
 FROM User;
 
 CREATE VIEW homePageView AS
