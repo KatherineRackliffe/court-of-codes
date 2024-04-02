@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 import mysql.connector
 from dotenv import load_dotenv
+import psycopg2
 
 
 # Load environment variables from .env file
@@ -15,7 +16,7 @@ app.secret_key = os.getenv("SECRET")
 # ------------------------ BEGIN FUNCTIONS ------------------------ #
 # Function to retrieve DB connection
 def get_db_connection():
-    conn = mysql.connector.connect(
+    conn = psycopg2.connect(
         host=os.getenv("DB_HOST"),
         user=os.getenv("DB_USER"),
         password=os.getenv("DB_PASSWORD"),

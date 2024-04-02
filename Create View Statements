@@ -1,31 +1,24 @@
-CREATE VIEW userShelfView AS
-SELECT UserName, ListName, ListID
-FROM USER
-INNER JOIN UserList ON User.UserID = UserList.UserID;
-
-# Later in our code, we could do the following to select a specific list, if we needed to:
-# SELECT * FROM userShelfView WHERE ListID = %s
-
 CREATE VIEW welcomePageView AS
-SELECT User.UserID, User.Username # Not sure if we should add email addresses.
-FROM User;
+SELECT Users.UserID, Users.Username
+FROM Users;
 
 CREATE VIEW homePageView AS
-SELECT Books.ISBN, Books.BookTitle, Books.BookCover, Books.AuthorFName, Books.AuthorLName, AVG(UserReview.NumericalReview) AS AverageReview
-FROM Books
-JOIN UserReview ON Books.ISBN = UserReview.ISBN
-GROUP BY Books.ISBN, Books.BookTitle, Books.BookCover, Books.AuthorFName, Books.AuthorLName;
+SELECT Book.ISBN, Book.BookTitle, Book.AuthorFName, Book.AuthorLName, AVG(UserReview.NumericalReview) AS AverageReview
+FROM book
+JOIN UserReview ON Book.ISBN = UserReview.ISBN
+GROUP BY Book.ISBN, Book.BookTitle, Book.AuthorFName, Book.AuthorLName;
 
 CREATE VIEW bookView AS
-SELECT Books.*, AVG(UserReview.NumericalReview) AS AverageReview, User.UserID, User.Username, Books.DatePublished
-FROM Books
-JOIN UserReview ON Books.ISBN = UserReview.ISBN
-JOIN User ON UserReview.UserID = User.UserID;
+SELECT book.isbn, book.booktitle, book.authorfname, book.authorlname, book.datepublished, book.pagecount, AVG(UserReview.NumericalReview) AS AverageReview, Users.UserID, Users.Username
+FROM Book
+JOIN UserReview ON Book.ISBN = UserReview.ISBN
+JOIN Users ON UserReview.UserID = Users.UserID
+GROUP BY book.isbn, book.booktitle, book.authorfname, book.authorlname, book.datepublished, book.pagecount, Users.UserID, Users.Username;
 
 CREATE VIEW userShelfView AS
-SELECT User.UserID, User.Username, UserList.ListName, UserList.ListID
-FROM User
-JOIN UserList ON User.UserID = UserList.UserID;
+SELECT Users.UserID, Users.Username, UserList.ListName, UserList.ListID
+FROM Users
+JOIN UserList ON Users.UserID = UserList.UserID;
 
 CREATE VIEW userListView AS
 SELECT 
@@ -35,18 +28,16 @@ SELECT
     ul.ListID,
     b.ISBN,
     b.BookTitle,
-    b.BookCover,
     b.AuthorFName,
     b.AuthorLName,
     b.DatePublished,
-    b.PageCount,
-    b.AverageReview
+    b.PageCount
 FROM 
-    User u
+    Users u
 JOIN 
     UserList ul ON u.UserID = ul.UserID
 JOIN 
-    BooksInList bil ON ul.ListID = bil.ListID
+    BookInList bil ON ul.ListID = bil.ListID
 JOIN 
     Book b ON bil.ISBN = b.ISBN;
 
