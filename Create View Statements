@@ -1,14 +1,14 @@
 CREATE VIEW userShelfView AS
-SELECT UserName, ListName, ListID
-FROM USER
-INNER JOIN UserList ON User.UserID = UserList.UserID;
+SELECT suername, listname, listis
+FROM users
+INNER JOIN userlist ON user.userid = userlist.userid;
 
 # Later in our code, we could do the following to select a specific list, if we needed to:
 # SELECT * FROM userShelfView WHERE ListID = %s
 
 CREATE VIEW welcomePageView AS
-SELECT User.UserID, User.Username # Not sure if we should add email addresses.
-FROM User;
+SELECT users.UserID, users.Username # Not sure if we should add email addresses.
+FROM users;
 
 CREATE VIEW homePageView AS
 SELECT Book.ISBN, Book.BookTitle, Book.BookCover, Book.AuthorFName, Book.AuthorLName, AVG(UserReview.NumericalReview) AS AverageReview
@@ -23,7 +23,7 @@ JOIN UserReview ON Book.ISBN = UserReview.ISBN
 JOIN User ON UserReview.UserID = User.UserID;
 
 CREATE VIEW userShelfView AS
-SELECT User.UserID, User.Username, UserList.ListName, UserList.ListID
+SELECT users.UserID, users.Username, UserList.ListName, UserList.ListID
 FROM User
 JOIN UserList ON User.UserID = UserList.UserID;
 
@@ -42,7 +42,7 @@ SELECT
     b.PageCount,
     b.AverageReview
 FROM 
-    User u
+    users u
 JOIN 
     UserList ul ON u.UserID = ul.UserID
 JOIN 
