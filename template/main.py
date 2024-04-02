@@ -77,7 +77,7 @@ def retrieve_list(id):
 @app.route("/shelf", methods=["GET"])
 def retrieve_shelf():
     lists = get_user_shelf_view() # Call defined function to get all items
-    return render_template("userShelf.html", url=request.base.url, lists=lists) # Return the page to be rendered
+    return render_template("userShelf.html", url=request.base_url, lists=lists) # Return the page to be rendered
 
 # EXAMPLE OF GET REQUEST
 @app.route("/", methods=["GET"])
