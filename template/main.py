@@ -35,10 +35,49 @@ def get_all_items():
     result = cursor.fetchall() # Gets result from query
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
     return result
+
+# Get the User shelf View 
+def get_user_shelf_view():
+    # Create a new database connection for each request
+    conn = get_db_connection()  # Create a new database connection
+    cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
+    # Query the db
+    query = "SELECT * FROM userShelfView"
+    cursor.execute(query)
+    # Get result and close
+    result = cursor.fetchall() # Gets result from query
+    conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
+    return result
+#FIXME
+def get_List():
+    # Create a new database connection for each request
+    conn = get_db_connection()  # Create a new database connection
+    cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
+    # Query the db
+    query = "SELECT * from userListView"
+    cursor.execute(query)
+    # Get result and close
+    result = cursor.fetchall() # Gets result from query
+    conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
+    return result
+
 # ------------------------ END FUNCTIONS ------------------------ #
 
 
 # ------------------------ BEGIN ROUTES ------------------------ #
+
+# Get request for listView
+@app.route("/list/<id>", methods=['GET'])
+def retrieve_list(id):
+  lists = get_list(id)
+  return render_template("listView.html", FIXME) # Return the page to be rendered
+
+# Get request for userShelf
+@app.route("/shelf", methods=["GET"])
+def retrieve_shelf():
+    lists = get_user_shelf_view() # Call defined function to get all items
+    return render_template("userShelf.html", url=request.base.url, lists=lists) # Return the page to be rendered
+
 # EXAMPLE OF GET REQUEST
 @app.route("/", methods=["GET"])
 def home():
@@ -65,6 +104,7 @@ def add_item():
     except Exception as e:
         flash(f"An error occurred: {str(e)}", "error") # Send the error message to the web page
         return redirect(url_for("home")) # Redirect to home
+        
 # ------------------------ END ROUTES ------------------------ #
 
 
