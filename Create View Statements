@@ -38,6 +38,7 @@ JOIN
     UserList ul ON u.UserID = ul.UserID
 JOIN 
     BookInList bil ON ul.ListID = bil.ListID
+    BookInList bil ON ul.ListID = bil.ListID
 JOIN 
     Book b ON bil.ISBN = b.ISBN;
 
