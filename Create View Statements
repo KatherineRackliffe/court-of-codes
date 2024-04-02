@@ -28,8 +28,27 @@ FROM User
 JOIN UserList ON User.UserID = UserList.UserID;
 
 CREATE VIEW userListView AS
-SELECT User.UserID, User.Username, UserList.ListName, UserList.ListID
-FROM User
-JOIN UserList ON User.UserID = UserList.UserID;
+SELECT 
+    u.UserID,
+    u.Username,
+    ul.ListName,
+    ul.ListID,
+    b.ISBN,
+    b.BookTitle,
+    b.BookCover,
+    b.AuthorFName,
+    b.AuthorLName,
+    b.DatePublished,
+    b.PageCount,
+    b.AverageReview
+FROM 
+    User u
+JOIN 
+    UserList ul ON u.UserID = ul.UserID
+JOIN 
+    BooksInList bil ON ul.ListID = bil.ListID
+JOIN 
+    Book b ON bil.ISBN = b.ISBN;
+
 
 
