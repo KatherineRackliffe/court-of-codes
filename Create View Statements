@@ -11,15 +11,15 @@ SELECT User.UserID, User.Username # Not sure if we should add email addresses.
 FROM User;
 
 CREATE VIEW homePageView AS
-SELECT Books.ISBN, Books.BookTitle, Books.BookCover, Books.AuthorFName, Books.AuthorLName, AVG(UserReview.NumericalReview) AS AverageReview
-FROM Books
-JOIN UserReview ON Books.ISBN = UserReview.ISBN
-GROUP BY Books.ISBN, Books.BookTitle, Books.BookCover, Books.AuthorFName, Books.AuthorLName;
+SELECT Book.ISBN, Book.BookTitle, Book.BookCover, Book.AuthorFName, Book.AuthorLName, AVG(UserReview.NumericalReview) AS AverageReview
+FROM Book
+JOIN UserReview ON Book.ISBN = UserReview.ISBN
+GROUP BY Book.ISBN, Book.BookTitle, Book.BookCover, Book.AuthorFName, Book.AuthorLName;
 
 CREATE VIEW bookView AS
-SELECT Books.*, AVG(UserReview.NumericalReview) AS AverageReview, User.UserID, User.Username, Books.DatePublished
-FROM Books
-JOIN UserReview ON Books.ISBN = UserReview.ISBN
+SELECT Book.*, AVG(UserReview.NumericalReview) AS AverageReview, User.UserID, User.Username, Book.DatePublished
+FROM Book
+JOIN UserReview ON Book.ISBN = UserReview.ISBN
 JOIN User ON UserReview.UserID = User.UserID;
 
 CREATE VIEW userShelfView AS
@@ -46,7 +46,7 @@ FROM
 JOIN 
     UserList ul ON u.UserID = ul.UserID
 JOIN 
-    BooksInList bil ON ul.ListID = bil.ListID
+    BookInList bil ON ul.ListID = bil.ListID
 JOIN 
     Book b ON bil.ISBN = b.ISBN;
 
