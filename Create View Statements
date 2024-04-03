@@ -1,4 +1,4 @@
-CREATE VIEW welcomePageView AS
+CREATE VIEW welcomepageview AS
 SELECT users.userid, users.username
 FROM users;
 
@@ -9,7 +9,7 @@ JOIN userreview ON book.isbn = userreview.isbn
 GROUP BY book.isbn, book.booktitle, book.authorfname, book.authorlname;
 
 CREATE VIEW bookview AS
-SELECT book.isbn, book.booktitle, book.authorfname, book.authorlname, book.datepublished, book.pagecount, AVG(userreview.NumericalReview) AS AverageReview, Users.UserID, Users.Username
+SELECT book.isbn, book.booktitle, book.authorfname, book.authorlname, book.datepublished, book.pagecount, AVG(userreview.numericalreview) AS averagereview, users.userid, users.username
 FROM book
 JOIN userreview ON book.isbn = userreview.isbn
 JOIN users ON userreview.userid = users.userid
