@@ -1,56 +1,56 @@
 CREATE TABLE users
 (
-  UserID SERIAL NOT NULL,
-  EmailAddress VARCHAR NOT NULL,
-  PasswordHash VARCHAR NOT NULL,
-  Username VARCHAR NOT NULL,
-  Salt VARCHAR NOT NULL,
-  PRIMARY KEY (UserID)
+  userid SERIAL NOT NULL,
+  emailaddress VARCHAR NOT NULL,
+  passwordhash VARCHAR NOT NULL,
+  username VARCHAR NOT NULL,
+  salt VARCHAR NOT NULL,
+  PRIMARY KEY (userid)
 );
-CREATE TABLE UserList
+CREATE TABLE userlist
 (
-  ListID SERIAL NOT NULL,
-  ListName VARCHAR NOT NULL,
-  UserID INT NOT NULL,
-  PRIMARY KEY (ListID),
-  FOREIGN KEY (UserID) REFERENCES users(UserID)
+  listid SERIAL NOT NULL,
+  listname VARCHAR NOT NULL,
+  userid INT NOT NULL,
+  PRIMARY KEY (listid),
+  FOREIGN KEY (userid) REFERENCES users(userid)
 );
-CREATE TABLE Book
+CREATE TABLE book
 (
-  ISBN VARCHAR NOT NULL,
-  BookTitle VARCHAR NOT NULL,
-  AuthorFName VARCHAR NOT NULL,
-  AuthorLName VARCHAR NOT NULL,
-  DatePublished DATE NOT NULL,
-  PageCount INT NOT NULL,
-  PRIMARY KEY (ISBN)
+  isbn VARCHAR NOT NULL,
+  booktitle VARCHAR NOT NULL,
+  authorfname VARCHAR NOT NULL,
+  authorlname VARCHAR NOT NULL,
+  datepublished DATE NOT NULL,
+  pagecount INT NOT NULL,
+  PRIMARY KEY (isbn)
 );
-CREATE TABLE BookInList
+CREATE TABLE bookinlist
 (
-  ListID INT NOT NULL,
-  ISBN VARCHAR NOT NULL,
-  PRIMARY KEY (ListID, ISBN),
-  FOREIGN KEY (ListID) REFERENCES UserList(ListID),
-  FOREIGN KEY (ISBN) REFERENCES Book(ISBN),
-  UNIQUE (ListID, ISBN)
+  listid INT NOT NULL,
+  isbn VARCHAR NOT NULL,
+  PRIMARY KEY (listid, isbn),
+  FOREIGN KEY (listid) REFERENCES userlist(listid),
+  FOREIGN KEY (isbn) REFERENCES book(isbn),
+  UNIQUE (listid, isbn)
 );
-CREATE TABLE UserTag
+CREATE TABLE usertag
 (
-  TagName VARCHAR NOT NULL,
-  UserID INT NOT NULL,
-  ISBN VARCHAR NOT NULL,
-  FOREIGN KEY (UserID) REFERENCES users(UserID),
-  FOREIGN KEY (ISBN) REFERENCES Book(ISBN),
-  UNIQUE (TagName),
-  UNIQUE (TagName, ISBN, UserID)
+  tagname VARCHAR NOT NULL,
+  userid INT NOT NULL,
+  isbn VARCHAR NOT NULL,
+  FOREIGN KEY (userid) REFERENCES users(userid),
+  FOREIGN KEY (isbn) REFERENCES book(isbn),
+  UNIQUE (tagname),
+  UNIQUE (tagname, isbn, userid)
 );
-CREATE TABLE UserReview
+CREATE TABLE userreview
 (
-  NumericalReview FLOAT NOT NULL,
-  UserID INT NOT NULL,
-  ISBN VARCHAR NOT NULL,
-  PRIMARY KEY (UserID, ISBN),
-  FOREIGN KEY (UserID) REFERENCES users(UserID),
-  FOREIGN KEY (ISBN) REFERENCES Book(ISBN),
-  UNIQUE (UserID, ISBN)
+  numericalreview FLOAT NOT NULL,
+  userid INT NOT NULL,
+  isbn VARCHAR NOT NULL,
+  PRIMARY KEY (userid, isbn),
+  FOREIGN KEY (userid) REFERENCES users(userid),
+  FOREIGN KEY (isbn) REFERENCES book(isbn),
+  UNIQUE (userid, isbn)
 ); 
