@@ -1,18 +1,18 @@
-INSERT INTO "book" (ISBN, BookTitle, AuthorFName, AuthorLName, DatePublished, PageCount)
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
 VALUES ('148470567X', 'Ahsoka', 'E.K.', 'Johnston', '10/11/2016', '400');
 
-INSERT INTO "users" (UserID, EmailAddress, PasswordHash, Username, Salt)
+INSERT INTO "users" (userid, emailaddress, passwordhash, username, salt)
 VALUES ('1234567', 'brandon@sanderson.com', '416f22b2185a96c8b4b07e4ba39ab1048657700ca4afcb49d45de73a994279db
 ', 'BrandonSanderson', 'stormlight');
 
-INSERT INTO "userreview" (UserID, ISBN, NumericalReview)	
+INSERT INTO "userreview" (userid, isbn, numericalreview)	
 VALUES ('1234567', '148470567X', 5.0);
 
-INSERT INTO "usertag" (TagName, UserID, ISBN)
+INSERT INTO "usertag" (tagname, userid, isbn)
 VALUES ('scifi', '1234567', '148470567X');
 
-INSERT INTO "userlist" (ListID, ListName, UserID)
+INSERT INTO "userlist" (listid, listname, userid)
 VALUES ('1', 'Good Books', '1234567');
 
-INSERT INTO "bookinlist" (ListID, ISBN)
+INSERT INTO "bookinlist" (listid, isbn)
 VALUES ('1', '148470567X');
