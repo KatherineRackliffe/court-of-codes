@@ -1,46 +1,46 @@
 CREATE VIEW welcomePageView AS
-SELECT Users.UserID, Users.Username
-FROM Users;
+SELECT users.userid, users.username
+FROM users;
 
-CREATE VIEW homePageView AS
-SELECT Book.ISBN, Book.BookTitle, Book.AuthorFName, Book.AuthorLName, AVG(UserReview.NumericalReview) AS AverageReview
+CREATE VIEW homepageview AS
+SELECT book.isbn, book.booktitle, book.authorfname, book.authorlname, AVG(userreview.numericalreview) AS averagereview
 FROM book
-JOIN UserReview ON Book.ISBN = UserReview.ISBN
-GROUP BY Book.ISBN, Book.BookTitle, Book.AuthorFName, Book.AuthorLName;
+JOIN userreview ON book.isbn = userreview.isbn
+GROUP BY book.isbn, book.booktitle, book.authorfname, book.authorlname;
 
-CREATE VIEW bookView AS
-SELECT book.isbn, book.booktitle, book.authorfname, book.authorlname, book.datepublished, book.pagecount, AVG(UserReview.NumericalReview) AS AverageReview, Users.UserID, Users.Username
-FROM Book
-JOIN UserReview ON Book.ISBN = UserReview.ISBN
-JOIN Users ON UserReview.UserID = Users.UserID
-GROUP BY book.isbn, book.booktitle, book.authorfname, book.authorlname, book.datepublished, book.pagecount, Users.UserID, Users.Username;
+CREATE VIEW bookview AS
+SELECT book.isbn, book.booktitle, book.authorfname, book.authorlname, book.datepublished, book.pagecount, AVG(userreview.NumericalReview) AS AverageReview, Users.UserID, Users.Username
+FROM book
+JOIN userreview ON book.isbn = userreview.isbn
+JOIN users ON userreview.userid = users.userid
+GROUP BY book.isbn, book.booktitle, book.authorfname, book.authorlname, book.datepublished, book.pagecount, users.userid, users.username;
 
-CREATE VIEW userShelfView AS
-SELECT Users.UserID, Users.Username, UserList.ListName, UserList.ListID
-FROM Users
-JOIN UserList ON Users.UserID = UserList.UserID;
+CREATE VIEW usershelfview AS
+SELECT users.userid, users.username, userlist.listname, userlist.listid
+FROM users
+JOIN userlist ON users.userid = userlist.userid;
 
-CREATE VIEW userListView AS
+CREATE VIEW userlistview AS
 SELECT 
-    u.UserID,
-    u.Username,
-    ul.ListName,
-    ul.ListID,
-    b.ISBN,
-    b.BookTitle,
-    b.AuthorFName,
-    b.AuthorLName,
-    b.DatePublished,
-    b.PageCount
+    u.userid,
+    u.username,
+    ul.listname,
+    ul.listid,
+    b.isbn,
+    b.booktitle,
+    b.authorfname,
+    b.authorlname,
+    b.datepublished,
+    b.pagecount
 FROM 
-    Users u
+    users u
 JOIN 
-    UserList ul ON u.UserID = ul.UserID
+    userlist ul ON u.userid = ul.userid
 JOIN 
-    BookInList bil ON ul.ListID = bil.ListID
-    BookInList bil ON ul.ListID = bil.ListID
+    BookInList bil ON ul.listid = bil.listid
+    BookInList bil ON ul.listid = bil.listid
 JOIN 
-    Book b ON bil.ISBN = b.ISBN;
+    Book b ON bil.isbn = b.isbn;
 
 
 
