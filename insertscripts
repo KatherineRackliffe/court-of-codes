@@ -11,7 +11,7 @@ INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pa
 VALUES ('9781635575637', 'Piranesi', 'Susanna', 'Clarke', '2020-09-15', 272);
 
 INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
-VALUES ('9781614505242', 'A Wizard\'s Guide to Defensive Baking', 'T.', 'Kingfisher', '2020-06-21', 306);
+VALUES ('9781614505242', 'A Wizard''s Guide to Defensive Baking', 'T.', 'Kingfisher', '2020-06-21', 306);
 
 INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
 VALUES ('9781639730940', 'Throne of Glass', 'Sarah J.', 'Maas', '2021-08-07', 406);
@@ -94,6 +94,15 @@ VALUES ('9780804139021', 'The Martian', 'Andy', 'Weir', '2011-09-27', 384);
 INSERT INTO "users" (userid, emailaddress, passwordhash, username, salt)
 VALUES ('1234567', 'brandon@sanderson.com', '416f22b2185a96c8b4b07e4ba39ab1048657700ca4afcb49d45de73a994279db
 ', 'BrandonSanderson', 'stormlight');
+
+INSERT INTO "users" (userid, emailaddress, passwordhash, username, salt)
+VALUES ('404', 'adalovalace@gmail.com', '416f22b2185a96c8b4b07e4ba39ab1148657700ca4afcb49d45de73a994279db', 'AdaLovelace', 'cabbage');
+
+INSERT INTO "users" (userid, emailaddress, passwordhash, username, salt)
+VALUES ('192010', 'kittirackliffe@gmail.com', '417f22b2185a96c8b4b07e4ba39ab1148657700ca4afcb49d45de73a994279db', 'Katherine', 'purple');
+
+INSERT INTO "users" (userid, emailaddress, passwordhash, username, salt)
+VALUES ('777', 'jakemullins@gmail.com', '417f22b2195a96c8b4b07e4ba39ab1148657700ca4afcb49d45de73a994279db', 'JakeMullins', 'rocky');
 
 INSERT INTO "userreview" (userid, isbn, numericalreview)	
 VALUES ('1234567', '148470567X', 5.0);
