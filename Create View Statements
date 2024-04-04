@@ -21,7 +21,7 @@ FROM users
 JOIN userlist ON users.userid = userlist.userid;
 
 CREATE VIEW userlistview AS
-SELECT 
+SELECT
     u.userid,
     u.username,
     ul.listname,
@@ -32,15 +32,11 @@ SELECT
     b.authorlname,
     b.datepublished,
     b.pagecount
-FROM 
-    users u
-JOIN 
-    userlist ul ON u.userid = ul.userid
-JOIN 
-    BookInList bil ON ul.listid = bil.listid
-    BookInList bil ON ul.listid = bil.listid
-JOIN 
-    Book b ON bil.isbn = b.isbn;
-
-
-
+FROM
+    Users u
+INNER JOIN
+    bookinlist bil ON u.userid = bil.userid
+INNER JOIN
+    userlist ul ON bil.listid = ul.listid
+INNER JOIN
+    book b ON bil.ISBN = b.ISBN;
