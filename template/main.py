@@ -70,19 +70,19 @@ def get_list(id):
 @app.route("/shelf/list/<id>", methods=['GET'])
 def retrieve_list(id):
   list = get_list(id)
-  return render_template("listView.html", list=list) # Return the page to be rendered
+  return render_template("listview.html", list=list) # Return the page to be rendered
 
 # Get request for userShelf
 @app.route("/shelf", methods=["GET"])
 def retrieve_shelf():
     lists = get_user_shelf_view() # Call defined function to get all items
-    return render_template("userShelf.html", url=request.base_url, lists=lists) # Return the page to be rendered
+    return render_template("usershelf.html", url=request.base_url, lists=lists) # Return the page to be rendered
 
 # Get request for bookView
-@app.route("/bookView", methods=["GET"])
+@app.route("/bookview", methods=["GET"])
 def retrieve_book():
     lists = get_user_shelf_view() # Call defined function to get all items FIXME
-    return render_template("bookView.html", url=request.base_url, lists=lists) # Return the page to be rendered
+    return render_template("bookview.html", url=request.base_url, lists=lists) # Return the page to be rendered
 
 # Get request for home
 @app.route("/home", methods=["GET"])
