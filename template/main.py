@@ -36,13 +36,25 @@ def get_all_items():
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
     return result
 
+def get_user_info():
+    # Create a new database connection for each request
+    conn = get_db_connection()  # Create a new database connection
+    cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
+    # Query the db
+    query = "SELECT username, userid FROM welcomepageview"
+    cursor.execute(query)
+    # Get result and close
+    result = cursor.fetchall() # Gets result from query
+    conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
+    return result
+
 # Get the User shelf View FIXME for only logged in user
 def get_user_shelf_view():
     # Create a new database connection for each request
     conn = get_db_connection()  # Create a new database connection
     cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
     # Query the db
-    query = "SELECT * FROM userShelfView"
+    query = "SELECT * FROM usershelfview"
     cursor.execute(query)
     # Get result and close
     result = cursor.fetchall() # Gets result from query
@@ -54,7 +66,7 @@ def get_list(id):
     conn = get_db_connection()  # Create a new database connection
     cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
     # Query the db
-    query = "SELECT * from userListView WHERE ListID=" + id
+    query = "SELECT * from userlistview WHERE listid=" + id
     cursor.execute(query)
     # Get result and close
     result = cursor.fetchall() # Gets result from query
