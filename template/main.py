@@ -78,6 +78,31 @@ def retrieve_shelf():
     lists = get_user_shelf_view() # Call defined function to get all items
     return render_template("userShelf.html", url=request.base_url, lists=lists) # Return the page to be rendered
 
+# Get request for bookView
+@app.route("/bookView", methods=["GET"])
+def retrieve_book():
+    lists = get_user_shelf_view() # Call defined function to get all items FIXME
+    return render_template("bookView.html", url=request.base_url, lists=lists) # Return the page to be rendered
+
+# Get request for home
+@app.route("/home", methods=["GET"])
+def retrieve_home():
+    lists = get_user_shelf_view() # Call defined function to get all items FIXME
+    return render_template("home.html", url=request.base_url, lists=lists) # Return the page to be rendered
+
+# Get request for search
+@app.route("/search", methods=["GET"])
+def retrieve_search():
+    lists = get_user_shelf_view() # Call defined function to get all items FIXME
+    return render_template("search.html", url=request.base_url, lists=lists) # Return the page to be rendered
+
+# Get request for userShelf
+@app.route("/welcome", methods=["GET"])
+def retrieve_welcome():
+    lists = get_user_shelf_view() # Call defined function to get all items FIXME
+    return render_template("welcome.html", url=request.base_url, lists=lists) # Return the page to be rendered
+
+
 # EXAMPLE OF GET REQUEST
 @app.route("/", methods=["GET"])
 def home():
