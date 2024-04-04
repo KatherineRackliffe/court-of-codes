@@ -3,12 +3,12 @@
 Current wave:
 
 - Make all pages pretty/consistent design
-- Populate databases with more data, dummy data (Katherine)
+- Populate databases with more data, dummy data (Katherine, Megan)
 - Implement calculated avg review functionality (Katherine)
-- Implement png functionality
+- Implement png functionality (Katherine, Taylor)
 - ~~Update documentation to be all lowercase (Taylor)~~
 - ~~Update all functions, variables, etc to be all lowercase (Taylor)~~
-- Update userListView (Megan)
+- ~~Update userListView (Megan)~~
 - Get the main components of these pages working and finished on our machines:
   - Welcome, Search (Taylor)
   - Home page, book view (Katherine)
