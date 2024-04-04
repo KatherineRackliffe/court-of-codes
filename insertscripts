@@ -118,5 +118,9 @@ VALUES ('2', 'Sci fi books', '234567');
 
 INSERT INTO "userlist" (listid, listname, userid)
 VALUES ('3', 'Fantasy books', '2345678');
+
 INSERT INTO "bookinlist" (listid, isbn)
 VALUES ('1', '148470567X');
+
+INSERT INTO "bookinlist" (listid, isbn)
+VALUES ('1', '9781473217850');
