@@ -20,10 +20,14 @@
     <!-- Code for listing owned items -->
     <h2>{{list[2]}}</h2>
     <ul>
-        
-        <!-- FIXME once view fixed Make link into lists/listID -->
-        <li>{{ list[5] }}</a></li>
-        
+        <!--{% for list in lists %} -->
+        <!-- FIXME once view fixed; make link into book; add png; uncomment loop; grab each book, select query etc so adjust variables and indexes -->
+        <li>{{ list[5] }}
+            <br>
+            {{ list[6] }} {{ list[7] }}
+            <br>
+        </li>
+        <!-- {% endfor %}-->
     </ul>
 </body>
 </html>
