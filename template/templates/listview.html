@@ -18,16 +18,16 @@
     {% endwith %}
 
     <!-- Code for listing owned items -->
-    <h2>{{list[2]}}</h2>
+    <h2>{{list[0][2]}}</h2>
     <ul>
-        <!--{% for list in lists %} -->
+        {% for book in list %}
         <!-- FIXME once view fixed; make link into book; add png; uncomment loop; grab each book, select query etc so adjust variables and indexes -->
-        <li>{{ list[5] }}
+        <li>{{ book[5] }}
             <br>
-            {{ list[6] }} {{ list[7] }}
-            <br>
+            {{ book[6] }} {{ book[7] }}
+            <br><br>
         </li>
-        <!-- {% endfor %}-->
+        {% endfor %}
     </ul>
 </body>
 </html>

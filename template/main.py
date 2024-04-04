@@ -60,7 +60,8 @@ def get_user_shelf_view():
     result = cursor.fetchall() # Gets result from query
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
     return result
-#FIXME filter by userid
+
+# Get the list view 
 def get_list(id):
     # Create a new database connection for each request
     conn = get_db_connection()  # Create a new database connection
@@ -78,14 +79,16 @@ def get_list(id):
 
 # ------------------------ BEGIN ROUTES ------------------------ #
 
-# Get request for listView FIXME fix ids
+# Get request for listView 
 @app.route("/shelf/list/<id>", methods=['GET'])
+# FIXME only allow to work for logged in user w/ try catch
 def retrieve_list(id):
   list = get_list(id)
   return render_template("listview.html", list=list) # Return the page to be rendered
 
 # Get request for userShelf
 @app.route("/shelf", methods=["GET"])
+# FIXME make work for logged in user, using session id linked to user w/ try catch
 def retrieve_shelf():
     lists = get_user_shelf_view() # Call defined function to get all items
     return render_template("usershelf.html", url=request.base_url, lists=lists) # Return the page to be rendered
