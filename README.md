@@ -9,15 +9,6 @@
 
 ---
 
-## TABLE OF CONTENTS
-
-- Type chapter level (level 1)
-- Type chapter level (level 2)
-- Type chapter title (level 3)
-- Type chapter level (level 1)
-- Type chapter level (level 2)
-- Type chapter title (level 3)
-
 ## PROJECT OVERVIEW
 
 ### PROJECT OBJECTIVE STATEMENT
@@ -77,12 +68,6 @@ The stakeholders are looking for the following in our app. Stakeholders want to 
 ### BUSINESS RULES
 
 While users will be able to interact and add input to our databases, we strive to ensure that our data remains confidential, accurate, and a clear representation of our clients. In order to maintain the validity and privacy of the data we may collect, we have imposed the following business rules.
-
-...
-
-(Truncated for brevity)
-
----
 
 ## DATABASE DOCUMENTATION
 
@@ -160,8 +145,6 @@ Core data fields (C) or Derived fields (D)
 ---
 
 ## APPENDIX 1: LOW-FIDELITY PAPER PROTOTYPES
-
-[Inserting image...]
 
 ---
 
