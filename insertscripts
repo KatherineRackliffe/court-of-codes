@@ -1,0 +1,108 @@
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('148470567X', 'Ahsoka', 'E.K.', 'Johnston', '2016-10-11', 400);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9780316381994', 'The Wild Robot', 'Peter', 'Brown', '2016-04-05', 279);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9780593135204', 'Project Hail Mary', 'Andy', 'Weir', '2021-05-04', 476);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9781635575637', 'Piranesi', 'Susanna', 'Clarke', '2020-09-15', 272);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9781614505242', 'A Wizard\'s Guide to Defensive Baking', 'T.', 'Kingfisher', '2020-06-21', 306);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9781639730940', 'Throne of Glass', 'Sarah J.', 'Maas', '2021-08-07', 406);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9780778324331', 'Poison Study', 'Maria V.', 'Snyder', '2005-09-27', 427);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9780399180729', 'Minecraft: The End', 'Catherynne M.', 'Valente', '2019-12-03', 256);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9781534430990', 'This is How You Lose the Time War', 'Amal', 'El-Mohtar', '2019-06-16', 209);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9780062571168', 'Maximillian Fly', 'Annie', 'Sage', '2019-06-11', 384);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9781473217850', 'Skyward', 'Brandon', 'Sanderson', '2018-11-06', 513);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9780735264359', 'Sweep: The Story of a Girl and Her Monster', 'Jonathan', 'Auxier', '2018-09-25', 400);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9781250126429', 'Mirage', 'Somaiya', 'Daud', '2018-08-28', 320);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9780062570604', 'Dread Nation', 'Justina', 'Ireland', '2018-04-03', 455);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9781501139239', 'The Seven Husbands of Evelyn Hugo', 'Taylor Jenkins', 'Reid', '2017-06-13', 389);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9781780894843', 'Thrawn', 'Timothy', 'Zahn', '2017-04-06', 427);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9781681193434', 'The Dragon with a Chocolate Heart', 'Stephanie', 'Burgis', '2017-02-09', 256);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9781250044655', 'Heartless', 'Marissa', 'Meyer', '2016-11-08', 453);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9780062363596', 'Hidden Figures', 'Margot Lee', 'Shetterly', '2016-09-06', 346);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9781616205676', 'The Girl Who Drank the Moon', 'Kelly', 'Barnhill', '2016-09-09', 388);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9781626721562', 'The Nameless City', 'Faith Erin', 'Hicks', '2016-04-05', 232);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9780192742759', 'Railhead', 'Philip', 'Reeve', '2015-10-01', 312);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9780062278234', 'Nimona', 'N.D.', 'Stevenson', '2015-05-12', 266);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9780062299963', 'Masterminds', 'Gordon', 'Korman', '2015-02-03', 336);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9781481409193', 'Story Thieves', 'James', 'Riley', '2015-01-20', 383);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9780385743563', 'Steelheart', 'Brandon', 'Sanderson', '2013-09-24', 386);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9781743532805', 'The Rithmatist', 'Brandon', 'Sanderson', '2014-05-01', 386);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9781442445932', 'Keeper of the Lost Cities', 'Shannon', 'Messenger', '2012-10-02', 496);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9780312641894', 'Cinder', 'Marissa', 'Meyer', '2012-01-03', 390);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9780142422076', 'Legend', 'Marie', 'Lu', '2013-04-16', 305);
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('9780804139021', 'The Martian', 'Andy', 'Weir', '2011-09-27', 384);
+
+INSERT INTO "users" (userid, emailaddress, passwordhash, username, salt)
+VALUES ('1234567', 'brandon@sanderson.com', '416f22b2185a96c8b4b07e4ba39ab1048657700ca4afcb49d45de73a994279db
+', 'BrandonSanderson', 'stormlight');
+
+INSERT INTO "userreview" (userid, isbn, numericalreview)	
+VALUES ('1234567', '148470567X', 5.0);
+
+INSERT INTO "usertag" (tagname, userid, isbn)
+VALUES ('scifi', '1234567', '148470567X');
+
+INSERT INTO "userlist" (listid, listname, userid)
+VALUES ('1', 'Good Books', '1234567');
+
+INSERT INTO "bookinlist" (listid, isbn)
+VALUES ('1', '148470567X');
