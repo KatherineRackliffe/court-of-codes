@@ -2,7 +2,8 @@
 
 Current wave:
 
-- Make all pages pretty/consistent design
+- Make all pages pretty (Taylor)
+- Make pages consistent design
 - Populate databases with more data, dummy data (Katherine, Megan)
 - Implement calculated avg review functionality (Katherine)
 - Implement png functionality (Katherine, Taylor)
