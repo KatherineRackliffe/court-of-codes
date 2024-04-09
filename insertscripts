@@ -1,5 +1,5 @@
 INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
-VALUES ('148470567X', 'Ahsoka', 'E.K.', 'Johnston', '2016-10-11', 400);
+VALUES ('9781484705667', 'Ahsoka', 'E.K.', 'Johnston', '2016-10-11', 400);
 
 INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
 VALUES ('9780316381994', 'The Wild Robot', 'Peter', 'Brown', '2016-04-05', 279);
