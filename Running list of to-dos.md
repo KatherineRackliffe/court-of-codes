@@ -4,9 +4,9 @@ Current wave:
 
 - Make all pages pretty (Taylor)
 - Make pages consistent design
-- Populate databases with more data, dummy data (Katherine, Megan)
+- Populate databases with ~~more data,~~ dummy data (Katherine)
 - Implement calculated avg review functionality (Katherine)
-- Implement png functionality (Katherine, Taylor)
+- ~~Implement png functionality (Katherine)~~
 - ~~Update documentation to be all lowercase (Taylor)~~
 - ~~Update all functions, variables, etc to be all lowercase (Taylor)~~
 - ~~Update userListView (Megan)~~

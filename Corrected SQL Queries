@@ -13,7 +13,7 @@ CREATE TABLE userlist
   listname VARCHAR NOT NULL,
   userid INT NOT NULL,
   PRIMARY KEY (listid),
-  FOREIGN KEY (userid) REFERENCES users(userid)
+  FOREIGN KEY (userid) REFERENCES users(userid) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE book
 (
@@ -30,8 +30,8 @@ CREATE TABLE bookinlist
   listid INT NOT NULL,
   isbn VARCHAR NOT NULL,
   PRIMARY KEY (listid, isbn),
-  FOREIGN KEY (listid) REFERENCES userlist(listid),
-  FOREIGN KEY (isbn) REFERENCES book(isbn),
+  FOREIGN KEY (listid) REFERENCES userlist(listid) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (isbn) REFERENCES book(isbn) ON DELETE CASCADE ON UPDATE CASCADE,
   UNIQUE (listid, isbn)
 );
 CREATE TABLE usertag
@@ -39,8 +39,8 @@ CREATE TABLE usertag
   tagname VARCHAR NOT NULL,
   userid INT NOT NULL,
   isbn VARCHAR NOT NULL,
-  FOREIGN KEY (userid) REFERENCES users(userid),
-  FOREIGN KEY (isbn) REFERENCES book(isbn),
+  FOREIGN KEY (userid) REFERENCES users(userid) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (isbn) REFERENCES book(isbn) ON DELETE CASCADE ON UPDATE CASCADE,
   UNIQUE (tagname),
   UNIQUE (tagname, isbn, userid)
 );
@@ -50,7 +50,7 @@ CREATE TABLE userreview
   userid INT NOT NULL,
   isbn VARCHAR NOT NULL,
   PRIMARY KEY (userid, isbn),
-  FOREIGN KEY (userid) REFERENCES users(userid),
-  FOREIGN KEY (isbn) REFERENCES book(isbn),
+  FOREIGN KEY (userid) REFERENCES users(userid) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (isbn) REFERENCES book(isbn) ON DELETE CASCADE ON UPDATE CASCADE,
   UNIQUE (userid, isbn)
 ); 
