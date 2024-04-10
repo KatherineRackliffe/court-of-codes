@@ -36,6 +36,15 @@ def get_all_items():
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
     return result
 
+def get_random_books(): #For the home page, the three random books.
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    query = "SELECT booktitle, authorfname FROM book ORDER BY RANDOM() LIMIT 3"
+    cursor.execute(query)
+    recommended_books = cursor.fetchall()
+    conn.close()
+    return recommended_books
+
 def get_user_info():
     # Create a new database connection for each request
     conn = get_db_connection()  # Create a new database connection
@@ -102,8 +111,8 @@ def retrieve_book():
 # Get request for home
 @app.route("/home", methods=["GET"])
 def retrieve_home():
-    lists = get_user_shelf_view() # Call defined function to get all items FIXME
-    return render_template("home.html", url=request.base_url, lists=lists) # Return the page to be rendered
+    recommended_books = get_random_books()
+    return render_template("home.html", recommended_books=recommended_books)
 
 # Get request for search
 @app.route("/search", methods=["GET"])

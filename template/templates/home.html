@@ -21,11 +21,17 @@
     <h1>Welcome to Bestreads</h1>
 
     <!-- The three random books chosen from the database -->
-    <div class="random-books">
-        <h2>Our recomendations</h2>
-        <ul>
-        </ul>
-    </div>
+    <!-- Code for listing books -->
+    <h2>Recommended Books</h2>
+    <ul>
+        {% for book in recommended_books %}
+        <li>
+            <img src="{{ url_for('static', filename='covers/' + book[2] + '.png') }}" alt="{{ book[0] }} cover">
+            <p>{{ book[0] }}</p>
+            <p>{{ book[1] }}</p>
+        </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
 
