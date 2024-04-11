@@ -86,7 +86,7 @@ def get_list(id):
 def get_book_details(isbn):
     conn = get_db_connection()
     cursor = conn.cursor()
-    query = "SELECT * FROM bookview WHERE isbn = %s"
+    query = "SELECT * FROM bookview2 WHERE isbn = %s"
     cursor.execute(query, (isbn,))
     book_details = cursor.fetchone()
     conn.close()
@@ -100,6 +100,17 @@ def retrieve_random_book_details():
     random_book = cursor.fetchone()
     conn.close()
     return random_book
+
+#Function to create a new list
+def create_new_list(new_list_name):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    #FIXME add query w/ user and insert new list
+    query = ""
+    cursor.execute(query)
+    conn.close()
+    return
+
 # ------------------------ END FUNCTIONS ------------------------ #
 
 
@@ -109,8 +120,11 @@ def retrieve_random_book_details():
 @app.route("/shelf/list/<id>", methods=['GET'])
 # FIXME only allow to work for logged in user w/ try catch
 def retrieve_list(id):
-  list = get_list(id)
-  return render_template("listview.html", list=list) # Return the page to be rendered
+    list = get_list(id)
+    url=request.base_url
+    # Just grab the domain, not anything including a slash or afterwards (for local only, won't work on server b/c htts:// #FIXME)
+    url = url.split("/")[0]
+    return render_template("listview.html", list=list, url=url) # Return the page to be rendered
 
 # Get request for userShelf
 @app.route("/shelf", methods=["GET"])
@@ -118,12 +132,35 @@ def retrieve_list(id):
 def retrieve_shelf():
     lists = get_user_shelf_view() # Call defined function to get all items
     return render_template("usershelf.html", url=request.base_url, lists=lists) # Return the page to be rendered
+ 
+# Shelf POST REQUEST #FIXME
+@app.route("/shelf", methods=["POST"])
+def createlist():
+    try:
+        # Get items from the form
+        data = request.form
+        new_list_name = data["newlistname"] # This is defined in the input element of the HTML form on index.html
+
+        # FIXME go to function and fix
+        create_new_list(new_list_name)
+        
+        # Send message to page. There is code in index.html that checks for these messages
+        flash("Item added successfully", "success")
+        # Redirect to home. This works because the home route is named home in this file
+
+    # If an error occurs, this code block will be called
+    except Exception as e:
+        flash(f"An error occurred: {str(e)}", "error") # Send the error message to the web page
+        return redirect(url_for("home")) # Redirect to home
 
 # # Get request for bookView
 @app.route("/bookview/<isbn>", methods=["GET"])
 def retrieve_book(isbn):
     book_details = get_book_details(isbn)
-    return render_template("bookview.html", book_details=book_details)
+    url=request.base_url
+    # Just grab the domain, not anything including a slash or afterwards (for local only, won't work on server b/c htts:// #FIXME)
+    url = url.split("/")[0]
+    return render_template("bookview.html", book_details=book_details, url=url)
 
 @app.route("/book", methods=["GET"])
 def retrieve_random_book(): 

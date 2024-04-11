@@ -17,7 +17,14 @@
         {% endif %}
     {% endwith %}
 
-    <!-- Code for listing owned items -->
+    <h3> Create a new list </h3>
+
+    <form action="/shelf" method="post">
+        <label for="listname"><b>List name</b></label>
+        <input type="text" id="newlistname" placeholder="Enter List Name" name="listname" required>
+        <button name="submitbutton" type="submit">Create</button>
+    </form>
+
     <h2>Your Lists</h2>
     <ul>
         {% for list in lists %}
