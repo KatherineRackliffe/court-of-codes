@@ -23,7 +23,7 @@
     <ul>
         {% for book in list %}
         <!-- FIXME once view fixed; make link into book; add png; uncomment loop; grab each book, select query etc so adjust variables and indexes -->
-        <li>
+        <div>
             <img src= " {{url_for('static', filename='covers/' + book[4] + '.jpg')}}" alt="{{ book[5] }} cover">
             <br>
             <a href="{{url}}/bookview/{{book[4]}}">{{ book[5] }}</a>

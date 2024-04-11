@@ -12,6 +12,10 @@ app = Flask(__name__)
 app.secret_key = os.getenv("SECRET")
 
 
+# Session functionality
+
+
+
 # ------------------------ BEGIN FUNCTIONS ------------------------ #
 # Function to retrieve DB connection
 def get_db_connection():
