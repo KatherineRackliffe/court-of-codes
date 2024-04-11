@@ -16,9 +16,9 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-
-    <!-- Code for listing owned items -->
-
+   
+    <!--Display error message if no items in list-->
+    {% if list != [] %}
     <h2>{{list[0][2]}}</h2>
     <ul>
         {% for book in list %}
@@ -33,6 +33,13 @@
         </li>
         {% endfor %}
     </ul>
+    {% else %}
+        <h2>Hmm, it looks like you don't have any books in this list.</h2>
+        <!--Back button-->
+        <a href="javascript:history.go(-1)">Back</a>
+    {% endif %}   
+
+    
 </body>
 </html>
 

@@ -81,13 +81,13 @@ def get_user_info():
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
     return result
 
-# Get the User shelf View FIXME for only logged in user
+# Get the User shelf View
 def get_user_shelf_view():
     # Create a new database connection for each request
     conn = get_db_connection()  # Create a new database connection
     cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
     # Query the db
-    query = "SELECT * FROM usershelfview"
+    query = "SELECT * FROM usershelfview WHERE userid=" + str(session["userid"])
     cursor.execute(query)
     # Get result and close
     result = cursor.fetchall() # Gets result from query
@@ -100,7 +100,7 @@ def get_list(id):
     conn = get_db_connection()  # Create a new database connection
     cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
     # Query the db
-    query = "SELECT * from userlistview WHERE listid=" + id
+    query = "SELECT * from userlistview WHERE (listid=" + id + " AND userid=" + str(session["userid"]) + ")"
     cursor.execute(query)
     # Get result and close
     result = cursor.fetchall() # Gets result from query
@@ -161,7 +161,6 @@ def retrieve_list(id):
 
 # Get request for userShelf
 @app.route("/shelf", methods=["GET"])
-# FIXME make work for logged in user, using session id linked to user w/ try catch
 def retrieve_shelf():
     lists = get_user_shelf_view() # Call defined function to get all items
     return render_template("usershelf.html", url=request.base_url, lists=lists) # Return the page to be rendered
@@ -227,25 +226,25 @@ def home():
     return render_template("home.html", recommended_books=recommended_books) # Return the page to be rendered
 
 # EXAMPLE OF POST REQUEST
-@app.route("/new-item", methods=["POST"])
-def add_item():
-    try:
-        # Get items from the form
-        data = request.form
-        item_name = data["name"] # This is defined in the input element of the HTML form on index.html
-        item_quantity = data["quantity"] # This is defined in the input element of the HTML form on index.html
+# @app.route("/new-item", methods=["POST"])
+# def add_item():
+#     try:
+#         # Get items from the form
+#         data = request.form
+#         item_name = data["name"] # This is defined in the input element of the HTML form on index.html
+#         item_quantity = data["quantity"] # This is defined in the input element of the HTML form on index.html
 
-        # TODO: Insert this data into the database
+#         # TODO: Insert this data into the database
         
-        # Send message to page. There is code in index.html that checks for these messages
-        flash("Item added successfully", "success")
-        # Redirect to home. This works because the home route is named home in this file
-        return redirect(url_for("home"))
+#         # Send message to page. There is code in index.html that checks for these messages
+#         flash("Item added successfully", "success")
+#         # Redirect to home. This works because the home route is named home in this file
+#         return redirect(url_for("home"))
 
-    # If an error occurs, this code block will be called
-    except Exception as e:
-        flash(f"An error occurred: {str(e)}", "error") # Send the error message to the web page
-        return redirect(url_for("home")) # Redirect to home
+#     # If an error occurs, this code block will be called
+#     except Exception as e:
+#         flash(f"An error occurred: {str(e)}", "error") # Send the error message to the web page
+#         return redirect(url_for("home")) # Redirect to home
 
 # Log users in
 @app.route('/login', methods=['GET', 'POST'])
@@ -383,3 +382,4 @@ def hash_password(password, salt=None):
 # listen on port 8080
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True) # TODO: Students PLEASE remove debug=True when you deploy this for production!!!!!
+    
