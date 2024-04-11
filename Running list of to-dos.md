@@ -14,6 +14,7 @@ Current wave:
   - Welcome, Search (Taylor)
   - Home page, book view (Katherine)
   - User shelf, list view (Megan)
+  - Create an account page
 
 Next wave: 
 

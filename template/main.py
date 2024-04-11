@@ -23,18 +23,27 @@ def get_db_connection():
     )
     return conn
 
-# Get all items from the "items" table of the db
-def get_all_items():
-    # Create a new database connection for each request
-    conn = get_db_connection()  # Create a new database connection
-    cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
-    # Query the db
-    query = "SELECT name, quantity FROM items"
+# Get all items from the "items" table of the db (Jordan's example code)
+# def get_all_items():
+#     # Create a new database connection for each request
+#     conn = get_db_connection()  # Create a new database connection
+#     cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
+#     # Query the db
+#     query = "SELECT name, quantity FROM items"
+#     cursor.execute(query)
+#     # Get result and close
+#     result = cursor.fetchall() # Gets result from query
+#     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
+#     return result
+
+def get_random_books():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    query = "SELECT booktitle, authorfname, authorlname, isbn FROM book ORDER BY RANDOM() LIMIT 3"
     cursor.execute(query)
-    # Get result and close
-    result = cursor.fetchall() # Gets result from query
-    conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
-    return result
+    recommended_books = cursor.fetchall()
+    conn.close()
+    return recommended_books
 
 def get_user_info():
     # Create a new database connection for each request
@@ -74,6 +83,23 @@ def get_list(id):
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
     return result
 
+def get_book_details(isbn):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    query = "SELECT * FROM bookview WHERE isbn = %s"
+    cursor.execute(query, (isbn,))
+    book_details = cursor.fetchone()
+    conn.close()
+    return book_details
+
+def retrieve_random_book_details(): 
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    query = "SELECT isbn, booktitle, authorfname, authorlname, datepublished, pagecount, averagereview, userid, username FROM bookview ORDER BY RANDOM() LIMIT 1"
+    cursor.execute(query)
+    random_book = cursor.fetchone()
+    conn.close()
+    return random_book
 # ------------------------ END FUNCTIONS ------------------------ #
 
 
@@ -93,17 +119,22 @@ def retrieve_shelf():
     lists = get_user_shelf_view() # Call defined function to get all items
     return render_template("usershelf.html", url=request.base_url, lists=lists) # Return the page to be rendered
 
-# Get request for bookView
-@app.route("/bookview", methods=["GET"])
-def retrieve_book():
-    lists = get_user_shelf_view() # Call defined function to get all items FIXME
-    return render_template("bookview.html", url=request.base_url, lists=lists) # Return the page to be rendered
+# # Get request for bookView
+@app.route("/bookview/<isbn>", methods=["GET"])
+def retrieve_book(isbn):
+    book_details = get_book_details(isbn)
+    return render_template("bookview.html", book_details=book_details)
+
+@app.route("/book", methods=["GET"])
+def retrieve_random_book(): 
+    random_book = retrieve_random_book_details()
+    return render_template("bookview.html", book_details=random_book)
 
 # Get request for home
 @app.route("/home", methods=["GET"])
 def retrieve_home():
-    lists = get_user_shelf_view() # Call defined function to get all items FIXME
-    return render_template("home.html", url=request.base_url, lists=lists) # Return the page to be rendered
+    recommended_books = get_random_books()
+    return render_template("home.html", recommended_books=recommended_books)
 
 # Get request for search
 @app.route("/search", methods=["GET"])
@@ -121,8 +152,8 @@ def retrieve_welcome():
 # EXAMPLE OF GET REQUEST
 @app.route("/", methods=["GET"])
 def home():
-    items = get_all_items() # Call defined function to get all items
-    return render_template("index.html", items=items) # Return the page to be rendered
+    recommended_books = get_random_books()
+    return render_template("home.html", recommended_books=recommended_books) # Return the page to be rendered
 
 # EXAMPLE OF POST REQUEST
 @app.route("/new-item", methods=["POST"])
