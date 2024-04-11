@@ -26,12 +26,13 @@
     <ul>
         {% for book in recommended_books %}
         <li>
-            <img src="{{ url_for('static', filename='covers/' + book[2] + '.png') }}" alt="{{ book[0] }} cover">
-            <p>{{ book[0] }}</p>
-            <p>{{ book[1] }}</p>
+            <!-- Ensure the correct index is used for each element -->
+            <img src="{{ url_for('static', filename='covers/' + book[3] + '.jpg') }}" alt="{{ book[0] }} cover">
+            <!-- Display book title, author first name, and author last name -->
+            <p>Title: {{ book[0] }}</p>
+            <p>Author: {{ book[1] }} {{ book[2] }}</p>
         </li>
         {% endfor %}
     </ul>
 </body>
 </html>
-

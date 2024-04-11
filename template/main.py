@@ -36,10 +36,10 @@ def get_all_items():
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
     return result
 
-def get_random_books(): #For the home page, the three random books.
+def get_random_books():
     conn = get_db_connection()
     cursor = conn.cursor()
-    query = "SELECT booktitle, authorfname FROM book ORDER BY RANDOM() LIMIT 3"
+    query = "SELECT booktitle, authorfname, authorlname, isbn FROM book ORDER BY RANDOM() LIMIT 3"
     cursor.execute(query)
     recommended_books = cursor.fetchall()
     conn.close()
