@@ -86,8 +86,17 @@ def get_list(id):
 def get_book_details(isbn):
     conn = get_db_connection()
     cursor = conn.cursor()
-    query = "SELECT * FROM bookview2 WHERE isbn = %s"
+    query = "SELECT * FROM bookview WHERE isbn = %s"
     cursor.execute(query, (isbn,))
+    book_details = cursor.fetchone()
+    conn.close()
+    return book_details
+
+def get_searched_books():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    query = "SELECT * FROM bookview WHERE title LIKE %s or authorfname LIKE %s or authorlname LIKE %s or pagecount LIKE %s or averagereview LIKE %s"
+    cursor.execute(query)
     book_details = cursor.fetchone()
     conn.close()
     return book_details

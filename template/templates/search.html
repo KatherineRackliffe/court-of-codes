@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Book Search</title>
 </head>
 <body>
-    <div class="container" class="search-bar">
-        <form action="" c>
-            <input type="text" placeholder="Search" name="q">
-            <button type="Submit"></button>
-        </form>
-    </div>
- 
+    <form action="/search" method="GET">
+        <input type="text" name="query" placeholder="Enter search query">
+        <button type="submit">Search</button>
+    </form>
 </body>
 </html>
