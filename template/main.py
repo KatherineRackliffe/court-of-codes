@@ -92,6 +92,14 @@ def get_book_details(isbn):
     conn.close()
     return book_details
 
+def retrieve_random_book_details(): 
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    query = "SELECT isbn, booktitle, authorfname, authorlname, datepublished, pagecount, averagereview, userid, username FROM bookview ORDER BY RANDOM() LIMIT 1"
+    cursor.execute(query)
+    random_book = cursor.fetchone()
+    conn.close()
+    return random_book
 # ------------------------ END FUNCTIONS ------------------------ #
 
 
@@ -116,6 +124,11 @@ def retrieve_shelf():
 def retrieve_book(isbn):
     book_details = get_book_details(isbn)
     return render_template("bookview.html", book_details=book_details)
+
+@app.route("/book", methods=["GET"])
+def retrieve_random_book(): 
+    random_book = retrieve_random_book_details()
+    return render_template("bookview.html", book_details=random_book)
 
 # Get request for home
 @app.route("/home", methods=["GET"])
