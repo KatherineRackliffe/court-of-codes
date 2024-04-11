@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, session, render_template, request, redirect, url_for, flash
 from dotenv import load_dotenv
 import psycopg2
 
@@ -189,7 +189,7 @@ def retrieve_home():
 # Get request for search
 @app.route("/search", methods=["GET"])
 def retrieve_search():
-    lists = get_user_shelf_view() # Call defined function to get all items FIXME
+    lists = get_searched_books() # Call defined function to get all items FIXME
     return render_template("search.html", url=request.base_url, lists=lists) # Return the page to be rendered
 
 # Get request for userShelf
