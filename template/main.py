@@ -99,11 +99,11 @@ def get_book_details(isbn):
 def get_searched_books():
     conn = get_db_connection()
     cursor = conn.cursor()
-    query = "SELECT * FROM bookview WHERE title LIKE %s or authorfname LIKE %s or authorlname LIKE %s or pagecount LIKE %s or averagereview LIKE %s"
+    query = "SELECT * FROM bookview WHERE title LIKE %s OR authorfname LIKE %s OR authorlname LIKE %s OR pagecount LIKE %s OR averagereview LIKE %s"
     cursor.execute(query)
-    book_details = cursor.fetchone()
+    result = cursor.fetchall()
     conn.close()
-    return book_details
+    return result
 
 def retrieve_random_book_details(): 
     conn = get_db_connection()
