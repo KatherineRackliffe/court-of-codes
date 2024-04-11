@@ -1,0 +1,101 @@
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fffacd; /* Light yellow */
+  color: #555;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Heading Styles */
+h1, h2, h3 {
+  color: #6b8e23; /* Olive green */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  font-family: 'Arial Rounded MT Bold', sans-serif;
+}
+
+/* Link Styles */
+a {
+  color: #8B4513; /* Brown accent */
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Button Styles */
+.button {
+  background-color: #f0f0f0;
+  border: none;
+  color: #333;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 25px; /* More rounded */
+  box-shadow: 5px 5px 10px #c9c9c9, -5px -5px 10px #ffffff;
+}
+
+.button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Input Styles */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  padding: 10px;
+  border-radius: 25px; /* More rounded */
+  border: 1px solid #ccc;
+  box-shadow: inset 5px 5px 10px #c9c9c9, inset -5px -5px 10px #ffffff;
+}
+
+/* Image Styles */
+img {
+  width: 25%; /* Make images smaller */
+  height: auto;
+  border-radius: 25px; /* More rounded */
+}
+
+/* Custom Classes */
+.green-text {
+  color: #6b8e23; /* Olive green */
+}
+
+.brown-text {
+  color: #8B4513; /* Brown accent */
+}
+  
+  
+.alert {
+    padding: 10px; /* Padding for spacing inside the message box */
+    margin-bottom: 15px; /* Margin at the bottom to create space between the message and other content */
+    border-radius: 4px; /* Rounded corners for a softer look */
+}
+
+.alert.success {
+    color: #3c763d;
+    border: 1px solid #3c763d;
+    background-color: #dff0d8;
+}
+
+.alert.error {
+    color: red;
+    border: 1px solid red;
+    background-color: #ffdede;
+}
+
+.alert.info {
+    color: rgb(77, 103, 190);
+    border: 1px solid rgb(77, 103, 190);
+    background-color: #d0e1f5;
+}
