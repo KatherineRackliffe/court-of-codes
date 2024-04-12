@@ -110,6 +110,7 @@ def get_list(id):
 def get_book_details(isbn):
     conn = get_db_connection()
     cursor = conn.cursor()
+    #FIXME - view only has 1 book currently, so change this
     query = "SELECT * FROM bookview WHERE isbn = %s"
     cursor.execute(query, (isbn,))
     book_details = cursor.fetchone()
@@ -139,10 +140,21 @@ def create_new_list(new_list_name):
     conn = get_db_connection()
     cursor = conn.cursor()
     #FIXME add query w/ user and insert new list
-    query = ""
-    cursor.execute(query)
+    query = "INSERT INTO userlist (listname, userid) VALUES ('" + new_list_name + "', '" + str(session["userid"]) + "')"
+    result = cursor.execute(query)
+    conn.commit() #Saves the changes to the database
     conn.close()
-    return
+    return query
+
+#Function to delete an old list
+def delete_old_list(old_list_name):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    query = "DELETE FROM userlist WHERE (listname = '" + old_list_name + "' AND userid= '" + str(session["userid"]) + "')"
+    result = cursor.execute(query)
+    conn.commit() #Saves the changes to the database
+    conn.close()
+    return result
 
 # ------------------------ END FUNCTIONS ------------------------ #
 
@@ -165,7 +177,7 @@ def retrieve_shelf():
     lists = get_user_shelf_view() # Call defined function to get all items
     return render_template("usershelf.html", url=request.base_url, lists=lists) # Return the page to be rendered
  
-# Shelf POST REQUEST #FIXME
+# Shelf POST REQUEST
 @app.route("/shelf", methods=["POST"])
 def createlist():
     try:
@@ -174,17 +186,37 @@ def createlist():
         new_list_name = data["newlistname"] # This is defined in the input element of the HTML form on index.html
 
         # FIXME go to function and fix
-        create_new_list(new_list_name)
+        result = create_new_list(new_list_name)
+        print(result)
         
         # Send message to page. There is code in index.html that checks for these messages
-        flash("Item added successfully", "success")
-        # Redirect to home. This works because the home route is named home in this file
-
+        flash("List created successfully", "success")
+        # Redirect to current page.
+        return redirect(request.base_url)
     # If an error occurs, this code block will be called
     except Exception as e:
         flash(f"An error occurred: {str(e)}", "error") # Send the error message to the web page
-        return redirect(url_for("home")) # Redirect to home
+        return redirect(request.base_url)
+    
+# Delete request for a user's list
+@app.route("/delete", methods=["POST"])
+def deletelist():
+    try:
+        # Get old list name from the form
+        data = request.form
+        oldlistname = data["oldlistname"] # This is defined in the input element of the HTML form
 
+        # Call the function that deletes the list using SQL
+        delete_old_list(oldlistname) 
+    
+        # Redirect to shelf view.
+        return redirect(url_for("retrieve_shelf"))
+    # If an error occurs, this code block will be called
+    except Exception as e:
+        flash(f"An error occurred: {str(e)}", "error") # Send the error message to the web page
+        return redirect(url_for("retrieve_shelf"))
+      
+    
 # # Get request for bookView
 @app.route("/bookview/<isbn>", methods=["GET"])
 def retrieve_book(isbn):

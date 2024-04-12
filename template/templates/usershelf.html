@@ -20,11 +20,13 @@
     <h3> Create a new list </h3>
 
     <form action="/shelf" method="post">
-        <label for="listname"><b>List name</b></label>
-        <input type="text" id="newlistname" placeholder="Enter List Name" name="listname" required>
-        <button name="submitbutton" type="submit">Create</button>
+        <label for="newlistname"><b>List name</b></label>
+        <input type="text" id="newlistname" placeholder="Enter List Name" name="newlistname" required>
+        <input type="submit" value="Create">
     </form>
 
+
+    <!-- Code for listing owned items -->
     <h2>Your Lists</h2>
     <ul>
         {% for list in lists %}

@@ -33,6 +33,13 @@
         </li>
         {% endfor %}
     </ul>
+    
+    <form action="/delete" method="post">
+        <input type="hidden" id="oldlistname" name="oldlistname" value={{list[0][2]}}>
+        Click here to delete your entire list permanently: <input type="submit" value="Delete list">
+    </form>
+    Warning: this action cannot be undone.
+
     {% else %}
         <h2>Hmm, it looks like you don't have any books in this list.</h2>
         <!--Back button-->
