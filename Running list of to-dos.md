@@ -13,8 +13,9 @@ Current wave:
 - Get the main components of these pages working and finished on our machines:
   - Welcome, Search (Taylor)
   - Home page, book view (Katherine)
-  - User shelf, list view (Megan)
-  - Create an account page
+  - ~~User shelf,~~ list view (Megan)
+  - ~~Create an account page~~
+  - Menu Bar for page tops (Home, MyLists, Search, Delete Account, Logout)
 
 Next wave: 
 
