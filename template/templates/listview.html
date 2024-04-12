@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{list[2]}}</title>
+    <title>{{ list_info[1] }}</title>
     <link rel="stylesheet" href="static/css/styles.css">
 </head>
 <body>
@@ -17,35 +17,36 @@
         {% endif %}
     {% endwith %}
    
+    <h2>{{ list_info[1] }}</h2>
     <!--Display error message if no items in list-->
     {% if list != [] %}
-    <h2>{{list[0][2]}}</h2>
     <ul>
         {% for book in list %}
         <!-- FIXME once view fixed; make link into book; add png; uncomment loop; grab each book, select query etc so adjust variables and indexes -->
         <div>
-            <img src= " {{url_for('static', filename='covers/' + book[4] + '.jpg')}}" alt="{{ book[5] }} cover">
+            <img src= " {{url_for('static', filename='covers/' + book[0] + '.jpg')}}" alt="{{ book[1] }} cover">
             <br>
-            <a href="{{url}}/bookview/{{book[4]}}">{{ book[5] }}</a>
+            <a href="{{url}}/bookview/{{book[0]}}">{{ book[1] }}</a>
             <br>
-            {{ book[6] }} {{ book[7] }}
+            {{ book[2] }} {{ book[3] }}
             <br><br>
         </li>
         {% endfor %}
     </ul>
-    
+
+
+    {% else %}
+        <h3>Hmm, it looks like you don't have any books in this list.</h3>
+        <!--Back button-->
+        <a href="javascript:history.go(-1)">Back</a>
+        <br><br>
+    {% endif %}   
+
     <form action="/delete" method="post">
-        <input type="hidden" id="oldlistname" name="oldlistname" value={{list[0][2]}}>
+        <input type="hidden" id="oldlistname" name="oldlistname" value= "{{list_info[0]}}">
         Click here to delete your entire list permanently: <input type="submit" value="Delete list">
     </form>
     Warning: this action cannot be undone.
-
-    {% else %}
-        <h2>Hmm, it looks like you don't have any books in this list.</h2>
-        <!--Back button-->
-        <a href="javascript:history.go(-1)">Back</a>
-    {% endif %}   
-
     
 </body>
 </html>

@@ -95,15 +95,28 @@ def get_user_shelf_view():
     return result
 
 # Get the list view 
-def get_list(id):
+def get_books_in_list(id):
     # Create a new database connection for each request
     conn = get_db_connection()  # Create a new database connection
     cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
     # Query the db
-    query = "SELECT * from userlistview WHERE (listid=" + id + " AND userid=" + str(session["userid"]) + ")"
+    query = "SELECT b.isbn, b.booktitle, b.authorfname, b.authorlname FROM userlist JOIN bookinlist bil ON bil.listid = userlist.listid JOIN book b ON bil.isbn = b.isbn WHERE (userlist.listid='" + id + "' AND userlist.userid='" + str(session["userid"]) + "')"
     cursor.execute(query)
     # Get result and close
     result = cursor.fetchall() # Gets result from query
+    conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
+    return result
+
+# Gets the listid, listname, userid
+def get_list_info(id):
+    # Create a new database connection for each request
+    conn = get_db_connection()  # Create a new database connection
+    cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
+    # Query the db
+    query = "SELECT * from userlist WHERE (listid=" + id + " AND userid=" + str(session["userid"]) + ")"
+    cursor.execute(query)
+    # Get result and close
+    result = cursor.fetchone() # Gets result from query
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
     return result
 
@@ -147,14 +160,14 @@ def create_new_list(new_list_name):
     return query
 
 #Function to delete an old list
-def delete_old_list(old_list_name):
+def delete_old_list(old_list_id):
     conn = get_db_connection()
     cursor = conn.cursor()
-    query = "DELETE FROM userlist WHERE (listname = '" + old_list_name + "' AND userid= '" + str(session["userid"]) + "')"
+    query = "DELETE FROM userlist WHERE (listid = '" + old_list_id + "' AND userid= '" + str(session["userid"]) + "')"
     result = cursor.execute(query)
     conn.commit() #Saves the changes to the database
     conn.close()
-    return result
+    return query
 
 # ------------------------ END FUNCTIONS ------------------------ #
 
@@ -165,11 +178,12 @@ def delete_old_list(old_list_name):
 @app.route("/shelf/list/<id>", methods=['GET'])
 # FIXME only allow to work for logged in user w/ try catch
 def retrieve_list(id):
-    list = get_list(id)
+    list = get_books_in_list(id)
+    list_info = get_list_info(id)
     url=request.base_url
     # Just grab the domain, not anything including a slash or afterwards (for local only, won't work on server b/c htts:// #FIXME)
     url = url.split("/")[0]
-    return render_template("listview.html", list=list, url=url) # Return the page to be rendered
+    return render_template("listview.html", list=list, list_info=list_info, url=url) # Return the page to be rendered
 
 # Get request for userShelf
 @app.route("/shelf", methods=["GET"])
@@ -204,11 +218,12 @@ def deletelist():
     try:
         # Get old list name from the form
         data = request.form
-        oldlistname = data["oldlistname"] # This is defined in the input element of the HTML form
+        oldlistid = data["oldlistname"] # This is defined in the input element of the HTML form
 
         # Call the function that deletes the list using SQL
-        delete_old_list(oldlistname) 
+        query = delete_old_list(oldlistid) 
     
+        print(query)
         # Redirect to shelf view.
         return redirect(url_for("retrieve_shelf"))
     # If an error occurs, this code block will be called
