@@ -15,7 +15,7 @@ Current wave:
   - ~~Welcome,~~ Search (Taylor)
         - Search includes search by author f/l name, title, isbn
   - ~~Home page,~~ book view (Katherine)
-        - Book view includes average review, tags, add/remove your reivew, add/remove your tags, add to a list
+        - Book view includes book info, average review, tags, add/remove your reivew, add/remove your tags, add to a list
   - ~~User shelf, list view(Megan)~~
   - ~~Create an account page~~
 
