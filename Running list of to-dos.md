@@ -21,9 +21,9 @@ Current wave:
 
 Next wave: 
 
-- Ensure business rules implemented
-- Test on the server
-- Make a presentation
-- Final once-over to documentation on Box, Github
+- Ensure business rules implemented (Taylor)
+- Test on the server (Megan)
+- Make a presentation (Taylor)
+- Final once-over to documentation on Box, Github (Megan)
 
 
