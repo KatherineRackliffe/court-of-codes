@@ -10,7 +10,14 @@
     <h1>Search Results</h1>
     <ul>
         {% for book in results %}
-        <li>{{ book }}</li>
+        <li>
+            <!-- Construct the URL for the cover image using the filename -->
+            <img src="{{ url_for('static', filename='covers/' + book.cover_image) }}" alt="{{ book.booktitle }} cover">
+            <!-- Display book title, author first name, and author last name -->
+            <p>Title: {{ book.booktitle }}</p>
+            <a href="{{ url_for('bookview', book_id=book.book_id) }}">{{ book.booktitle }}</a>
+            <p>Author: {{ book.authorfname }} {{ book.authorlname }}</p>
+        </li>
         {% endfor %}
     </ul>
 </body>

@@ -133,8 +133,8 @@ def get_book_details(isbn):
 def get_searched_books(search_term):
     conn = get_db_connection()
     cursor = conn.cursor()
-    query = "SELECT * FROM bookview WHERE title ILIKE %s OR authorfname ILIKE %s OR authorlname ILIKE %s OR pagecount ILIKE %s OR averagereview ILIKE %s"
-    cursor.execute(query, ('%' + search_term + '%', '%' + search_term + '%', '%' + search_term + '%', '%' + search_term + '%', '%' + search_term + '%'))
+    query = "SELECT * FROM bookview WHERE booktitle ILIKE %s OR authorfname ILIKE %s OR authorlname ILIKE %s"
+    cursor.execute(query, ('%' + search_term + '%', '%' + search_term + '%', '%' + search_term + '%'))
     result = cursor.fetchall()
     conn.close()
     return result
@@ -253,11 +253,17 @@ def retrieve_home():
     return render_template("home.html", recommended_books=recommended_books)
 
 # Get request for search
-@app.route("/search", methods=["POST"])
-def search():
-    search_term = request.form['search_term']
-    results = get_searched_books(search_term)
-    return render_template('results.html', results=results)
+@app.route("/search", methods=['GET', 'POST'])
+def retrive_search():
+    if request.method == "GET":
+        return render_template('search.html')
+    #once they search
+    elif request.method == "POST":
+        search_term = request.form['search_term']
+        results = get_searched_books(search_term)
+        return render_template('results.html', results=results)
+    
+    
 
 # Get request for userShelf
 @app.route("/welcome", methods=["GET"])
