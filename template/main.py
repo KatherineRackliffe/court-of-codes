@@ -133,7 +133,7 @@ def get_book_details(isbn):
 def get_searched_books(search_term):
     conn = get_db_connection()
     cursor = conn.cursor()
-    query = "SELECT * FROM bookview WHERE booktitle ILIKE %s OR authorfname ILIKE %s OR authorlname ILIKE %s"
+    query = "SELECT * FROM book WHERE booktitle ILIKE %s OR authorfname ILIKE %s OR authorlname ILIKE %s"
     cursor.execute(query, ('%' + search_term + '%', '%' + search_term + '%', '%' + search_term + '%'))
     result = cursor.fetchall()
     conn.close()
