@@ -12,11 +12,11 @@
         {% for book in results %}
         <li>
             <!-- Construct the URL for the cover image using the filename -->
-            <img src="{{ url_for('static', filename='covers/' + book.cover_image) }}" alt="{{ book.booktitle }} cover">
+            <img src="{{ url_for('static', filename='covers/' + book[0] + '.jpg')}}" alt="{{ book[1] }} cover">
             <!-- Display book title, author first name, and author last name -->
             <p>Title: {{ book.booktitle }}</p>
-            <a href="{{ url_for('bookview', book_id=book.book_id) }}">{{ book.booktitle }}</a>
-            <p>Author: {{ book.authorfname }} {{ book.authorlname }}</p>
+            <a href="{{url}}/bookview/{{book[0]}}">{{ book[1] }}</a>
+            <p>Author: {{ book[2] }} {{ book[3] }}</p>
         </li>
         {% endfor %}
     </ul>
