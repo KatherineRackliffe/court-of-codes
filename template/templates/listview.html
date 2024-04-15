@@ -6,6 +6,15 @@
     <title>{{ list_info[1] }}</title>
     <link rel="stylesheet" href="static/css/styles.css">
 </head>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/shelf">UserShelf</a></li>
+            <li><a href="/search">Search</a></li>
+        </ul>
+    </nav>
+</header>
 <body>
     <!-- Show error or success messages if there are any -->
     {% with messages = get_flashed_messages(with_categories=true) %}
