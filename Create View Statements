@@ -19,24 +19,3 @@ CREATE VIEW usershelfview AS
 SELECT users.userid, users.username, userlist.listname, userlist.listid
 FROM users
 JOIN userlist ON users.userid = userlist.userid;
-
-CREATE VIEW userlistview AS
-SELECT
-    u.userid,
-    u.username,
-    ul.listname,
-    ul.listid,
-    b.isbn,
-    b.booktitle,
-    b.authorfname,
-    b.authorlname,
-    b.datepublished,
-    b.pagecount
-FROM
-    Users u
-INNER JOIN
-    bookinlist bil ON u.userid = bil.userid
-INNER JOIN
-    userlist ul ON bil.listid = ul.listid
-INNER JOIN
-    book b ON bil.ISBN = b.ISBN;
