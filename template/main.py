@@ -174,6 +174,9 @@ def delete_old_list(old_list_id):
 
 # ------------------------ BEGIN ROUTES ------------------------ #
 
+
+
+
 # Get request for listView 
 @app.route("/shelf/list/<id>", methods=['GET'])
 # FIXME only allow to work for logged in user w/ try catch
