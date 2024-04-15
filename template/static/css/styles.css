@@ -4,13 +4,17 @@ body {
   background-color: #f9f9f9; /* Light yellow */
   color: #33b3a6;
   line-height: 1.6;
+  padding-top: 60px;
 }
 
 .container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  margin-top: 100px;
+
 }
+
 
 /* Heading Styles */
 h1, h2, h3 {
@@ -42,6 +46,7 @@ nav ul li {
 nav ul li a {
   color: #fff;
   text-decoration: none;
+  margin-left: 10px;
 }
 
 
