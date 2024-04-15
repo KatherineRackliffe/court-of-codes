@@ -81,7 +81,7 @@ def get_user_info():
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
     return result
 
-# Get the User shelf View
+# Get the User Shelf View
 def get_user_shelf_view():
     # Create a new database connection for each request
     conn = get_db_connection()  # Create a new database connection
@@ -94,7 +94,7 @@ def get_user_shelf_view():
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
     return result
 
-# Get the list view 
+# Gets the necessary data to display a user's list
 def get_books_in_list(id):
     # Create a new database connection for each request
     conn = get_db_connection()  # Create a new database connection
@@ -107,14 +107,14 @@ def get_books_in_list(id):
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
     return result
 
-# Gets the listid, listname, userid
+# Gets the listid, listname, userid for a specific list
 def get_list_info(id):
     # Create a new database connection for each request
     conn = get_db_connection()  # Create a new database connection
     cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
     # Query the db
-    query = "SELECT * from userlist WHERE (listid=" + id + " AND userid=" + str(session["userid"]) + ")"
-    cursor.execute(query)
+    query = "SELECT * from userlist WHERE (listid= %s AND userid=" + str(session["userid"]) + ")"
+    cursor.execute(query, (id,))
     # Get result and close
     result = cursor.fetchone() # Gets result from query
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
@@ -148,23 +148,23 @@ def retrieve_random_book_details():
     conn.close()
     return random_book
 
-#Function to create a new list
+# Creates a new list with the new list name
 def create_new_list(new_list_name):
     conn = get_db_connection()
     cursor = conn.cursor()
     #FIXME add query w/ user and insert new list
-    query = "INSERT INTO userlist (listname, userid) VALUES ('" + new_list_name + "', '" + str(session["userid"]) + "')"
-    result = cursor.execute(query)
+    query = "INSERT INTO userlist (listname, userid) VALUES (%s, '" + str(session["userid"]) + "')"
+    result = cursor.execute(query, (new_list_name,))
     conn.commit() #Saves the changes to the database
     conn.close()
     return query
 
-#Function to delete an old list
+# Deletes an old list by id
 def delete_old_list(old_list_id):
     conn = get_db_connection()
     cursor = conn.cursor()
-    query = "DELETE FROM userlist WHERE (listid = '" + old_list_id + "' AND userid= '" + str(session["userid"]) + "')"
-    result = cursor.execute(query)
+    query = "DELETE FROM userlist WHERE (listid = %s AND userid= '" + str(session["userid"]) + "')"
+    result = cursor.execute(query, (old_list_id,))
     conn.commit() #Saves the changes to the database
     conn.close()
     return query

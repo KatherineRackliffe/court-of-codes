@@ -1,0 +1,22 @@
+Insert Script Templates to populate the database with dummy data.
+Replace the [text here], including brackets, with the desired data.
+
+
+INSERT INTO "book" (isbn, booktitle, authorfname, authorlname, datepublished, pagecount)
+VALUES ('[isbn]', '[title]', '[first name]', '[last name]', '[yyyy]-[mm]-[dd]', [number of pages]);
+
+INSERT INTO "users" (userid, emailaddress, passwordhash, username, salt)
+VALUES ('[random number]', '[email address]', '[random generated hash]', '[username]', '[random generated salt]');
+
+INSERT INTO "userreview" (userid, isbn, numericalreview)	
+VALUES ('[an existing userid]', '[an existing isbn]', [0-5].[0-9]);
+
+INSERT INTO "usertag" (tagname, userid, isbn)
+VALUES ('[tag name]', '[an existing userid]', '[an existing isbn]');
+
+INSERT INTO "userlist" (listid, listname, userid)
+VALUES ('[random number]', '[list name]', '[an existing userid]');
+
+INSERT INTO "bookinlist" (listid, isbn)
+VALUES ('[an existing listid]', '[an existing isbn]');
+
