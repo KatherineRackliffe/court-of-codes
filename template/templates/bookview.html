@@ -22,7 +22,6 @@
         <h1>Book Details</h1>
         <div>
             <!-- Display each detail of the book -->
-            <img src= " {{url_for('static', filename='covers/' + book_details[0] + '.jpg')}}" alt="{{ book_details[1] }} cover">
             <p>ISBN: {{ book_details[0] }}</p>
             <p>Title: {{ book_details[1] }}</p>
             <p>Author: {{ book_details[2] }} {{ book_details[3] }}</p>
