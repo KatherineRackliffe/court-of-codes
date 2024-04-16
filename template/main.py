@@ -74,8 +74,8 @@ def get_user_shelf_view():
     conn = get_db_connection()  # Create a new database connection
     cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
     # Query the db
-    query = "SELECT * FROM usershelfview WHERE userid=" + str(session["userid"])
-    cursor.execute(query)
+    query = "SELECT * FROM usershelfview WHERE userid=%s"
+    cursor.execute(query, (str(session["userid"]),))
     # Get result and close
     result = cursor.fetchall() # Gets result from query
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
@@ -100,8 +100,8 @@ def get_list_info(user_id):
     conn = get_db_connection()  # Create a new database connection
     cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
     # Query the db
-    query = "SELECT listid, listname FROM userlist WHERE userid = %s"
-    cursor.execute(query, (user_id,))
+    query = "SELECT listid, listname FROM userlist WHERE (listid = %s AND userid=%s)"
+    cursor.execute(query, (user_id, str(session["userid"]),))
     # Get result and close
     result = cursor.fetchone() # Gets result from query
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
@@ -154,8 +154,8 @@ def create_new_list(new_list_name):
     conn = get_db_connection()
     cursor = conn.cursor()
     #FIXME add query w/ user and insert new list
-    query = "INSERT INTO userlist (listname, userid) VALUES (%s, '" + str(session["userid"]) + "')"
-    result = cursor.execute(query, (new_list_name,))
+    query = "INSERT INTO userlist (listname, userid) VALUES (%s, %s)"
+    result = cursor.execute(query, (new_list_name, str(session["userid"]),))
     conn.commit() #Saves the changes to the database
     conn.close()
     return query
@@ -164,8 +164,8 @@ def create_new_list(new_list_name):
 def delete_old_list(old_list_id):
     conn = get_db_connection()
     cursor = conn.cursor()
-    query = "DELETE FROM userlist WHERE (listid = %s AND userid= '" + str(session["userid"]) + "')"
-    result = cursor.execute(query, (old_list_id,))
+    query = "DELETE FROM userlist WHERE (listid = %s AND userid= %s)"
+    result = cursor.execute(query, (old_list_id, str(session["userid"]),))
     conn.commit() #Saves the changes to the database
     conn.close()
     return query
