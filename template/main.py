@@ -139,7 +139,7 @@ def get_searched_books(search_term):
     conn.close()
     return result
 
-def retrieve_random_book_details(): 
+def retrieve_random_book_details(): #used for debugging, probably should delete
     conn = get_db_connection()
     cursor = conn.cursor()
     query = "SELECT isbn, booktitle, authorfname, authorlname, datepublished, pagecount, averagereview, userid, username FROM bookview ORDER BY RANDOM() LIMIT 1"
@@ -173,9 +173,6 @@ def delete_old_list(old_list_id):
 
 
 # ------------------------ BEGIN ROUTES ------------------------ #
-
-
-
 
 # Get request for listView 
 @app.route("/shelf/list/<id>", methods=['GET'])
