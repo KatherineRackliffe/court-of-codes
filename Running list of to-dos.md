@@ -25,5 +25,6 @@ Next wave:
 - Test on the server (Megan)
 - Make a presentation (Taylor)
 - Final once-over to documentation on Box, Github (Megan)
+- Turn off debugging mode
 
 
