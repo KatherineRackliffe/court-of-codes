@@ -95,17 +95,18 @@ def get_books_in_list(id):
     return result
 
 # Gets the listid, listname, userid for a specific list
-def get_list_info(id):
+def get_list_info(user_id):
     # Create a new database connection for each request
     conn = get_db_connection()  # Create a new database connection
     cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
     # Query the db
-    query = "SELECT * from userlist WHERE (listid= %s AND userid=" + str(session["userid"]) + ")"
-    cursor.execute(query, (id,))
+    query = "SELECT listid, listname FROM userlist WHERE userid = %s"
+    cursor.execute(query, (user_id,))
     # Get result and close
-    result = cursor.fetchone() # Gets result from query
+    result = cursor.fetchall() # Gets result from query
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
     return result
+
 
 def get_book_details(isbn):
     conn = get_db_connection()
