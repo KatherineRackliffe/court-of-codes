@@ -31,8 +31,7 @@
     {% if list != [] %}
     <ul>
         {% for book in list %}
-        <!-- FIXME once view fixed; make link into book; add png; uncomment loop; grab each book, select query etc so adjust variables and indexes -->
-        <div>
+        <li>
             <img src= " {{url_for('static', filename='covers/' + book[0] + '.jpg')}}" alt="{{ book[1] }} cover">
             <br>
             <a href="{{url}}/bookview/{{book[0]}}">{{ book[1] }}</a>
