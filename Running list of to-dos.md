@@ -2,8 +2,8 @@
 
 Current wave:
 
-- Make all pages pretty (Taylor)
-- Make pages consistent design
+- ~~Make all pages pretty (Taylor)~~
+- ~~Make pages consistent design~~
 - Populate databases with ~~more data,~~ dummy data (Katherine, Megan)
       - Less of a priority. We can also add real data (vs dummy data) when funcionality is working properly
       - Dummy data to be added is bookinlist, usertag, userreview
@@ -17,7 +17,7 @@ Current wave:
         - Book view includes book info, average review, tags, add/remove your reivew, add/remove your tags, add to a list
   - ~~User shelf, list view(Megan)~~
   - ~~Create an account page~~
-  - Site navigation bar (Taylor)
+  - ~~Site navigation bar (Taylor)~~
 
 Next wave: 
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ list_info[1] }}</title>
-    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <header>
     <nav>
@@ -32,8 +32,7 @@
     {% if list != [] %}
     <ul>
         {% for book in list %}
-        <!-- FIXME once view fixed; make link into book; add png; uncomment loop; grab each book, select query etc so adjust variables and indexes -->
-        <div>
+        <li>
             <img src= " {{url_for('static', filename='covers/' + book[0] + '.jpg')}}" alt="{{ book[1] }} cover">
             <br>
             <a href="{{url}}/bookview/{{book[0]}}">{{ book[1] }}</a>
