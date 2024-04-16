@@ -95,18 +95,30 @@ def get_books_in_list(id):
     return result
 
 # Gets the listid, listname, userid for a specific list
-def get_list_info(user_id):
+def get_list_info(list_id):
     # Create a new database connection for each request
     conn = get_db_connection()  # Create a new database connection
     cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
     # Query the db
     query = "SELECT listid, listname FROM userlist WHERE (listid = %s AND userid=%s)"
-    cursor.execute(query, (user_id, str(session["userid"]),))
+    cursor.execute(query, (list_id, str(session["userid"]),))
     # Get result and close
     result = cursor.fetchone() # Gets result from query
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
     return result
 
+# Gets all a user's lists
+def get_lists():
+    # Create a new database connection for each request
+    conn = get_db_connection()  # Create a new database connection
+    cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
+    # Query the db
+    query = "SELECT listid, listname FROM userlist WHERE userid=%s"
+    cursor.execute(query, (str(session["userid"]),))
+    # Get result and close
+    result = cursor.fetchall() # Gets result from query
+    conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
+    return result
 
 def get_book_details(isbn):
     conn = get_db_connection()
@@ -351,12 +363,14 @@ def retrieve_book(isbn):
 
     book_details = get_book_details(isbn)
     tags = get_tags_for_book(isbn)
-    user_lists = get_list_info(session.get("userid"))  # Fetch user's lists using user id
+    user_lists = get_lists()  # Fetch user's lists using user id
 
     # Check if user_lists is None, and if so, provide an empty list instead
     if user_lists is None:
+        print("was none")
         user_lists = []
 
+    print("Userlist:", user_lists)
     return render_template("bookview.html", book_details=book_details, tags=tags, user_lists=user_lists)
 
 
