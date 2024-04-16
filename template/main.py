@@ -262,21 +262,13 @@ def retrive_search():
         search_term = request.form['search_term']
         results = get_searched_books(search_term)
         return render_template('results.html', results=results)
-    
-    
-
-# Get request for userShelf
-@app.route("/welcome", methods=["GET"])
-def retrieve_welcome():
-    lists = get_user_shelf_view() # Call defined function to get all items FIXME
-    return render_template("welcome.html", url=request.base_url, lists=lists) # Return the page to be rendered
 
 
-# EXAMPLE OF GET REQUEST
-@app.route("/", methods=["GET"])
-def home():
-    recommended_books = get_random_books()
-    return render_template("home.html", recommended_books=recommended_books) # Return the page to be rendered
+# # EXAMPLE OF GET REQUEST
+# @app.route("/", methods=["GET"])
+# def home():
+#     recommended_books = get_random_books()
+#     return render_template("home.html", recommended_books=recommended_books) # Return the page to be rendered
 
 # EXAMPLE OF POST REQUEST
 # @app.route("/new-item", methods=["POST"])
