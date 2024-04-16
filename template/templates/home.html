@@ -38,6 +38,7 @@
             <!-- Ensure the correct index is used for each element -->
             <img src="{{ url_for('static', filename='covers/' + book[3] + '.jpg') }}" alt="{{ book[0] }} cover"></p>
             <!-- Display book title, author first name, and author last name -->
+            <p>Title: {{ book[0] }}</p>
             <a href="{{url}}/bookview/{{ book[3] }}"> {{ book[0] }}</a>
             <p>Author: {{ book[1] }} {{ book[2] }}</p>
         </li>
