@@ -169,6 +169,34 @@ def delete_old_list(old_list_id):
     conn.close()
     return query
 
+
+# Add review to database
+def add_review_to_database(isbn, review):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    query = "INSERT INTO reviews (isbn, review) VALUES (%s, %s)"
+    cursor.execute(query, (isbn, review))
+    conn.commit()
+    conn.close()
+
+# Add tag to database
+def add_tag_to_database(isbn, tag):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    query = "INSERT INTO tags (isbn, tag) VALUES (%s, %s)"
+    cursor.execute(query, (isbn, tag))
+    conn.commit()
+    conn.close()
+
+# Add book to list in the database
+def add_book_to_list(isbn, list_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    query = "INSERT INTO bookinlist (isbn, listid) VALUES (%s, %s)"
+    cursor.execute(query, (isbn, list_id))
+    conn.commit()
+    conn.close()
+
 # ------------------------ END FUNCTIONS ------------------------ #
 
 
@@ -231,11 +259,30 @@ def deletelist():
         return redirect(url_for("retrieve_shelf"))
       
     
-@app.route("/bookview/<isbn>", methods=["GET"])
+@app.route("/bookview/<isbn>", methods=["GET", "POST"])
 def retrieve_book(isbn):
     book_details = get_book_details(isbn)
-    user_lists = get_user_shelf_view() 
-    return render_template("bookview.html", book_details=book_details, user_lists=user_lists)
+    #user_lists = get_user_lists()  # Assuming you have a function to get user's lists
+
+    if request.method == "POST":
+        action = request.form["action"]
+
+        if action == "add_review":
+            review = request.form["review"]
+            add_review_to_database(isbn, review)
+
+        elif action == "add_tag":
+            tag = request.form["tag"]
+            add_tag_to_database(isbn, tag)
+
+        elif action == "add_to_list":
+            list_id = request.form["list_id"]
+            add_book_to_list(isbn, list_id)
+
+        # Redirect back to the bookview page after processing the form
+        return redirect(url_for("retrieve_book", isbn=isbn))
+
+    return render_template("bookview.html", book_details=book_details)
 
 @app.route("/book", methods=["GET"])
 def retrieve_random_book(): 
