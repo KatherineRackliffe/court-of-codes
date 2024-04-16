@@ -131,7 +131,7 @@ def get_book_details(isbn):
 
     if book_details:
         # If book details are found, fetch additional details from the bookview
-        query_additional = "SELECT averagereview FROM bookview WHERE isbn = %s"
+        query_additional = "SELECT AVG(numericalreview) FROM userreview WHERE isbn = %s"
         cursor.execute(query_additional, (isbn,))
         additional_details = cursor.fetchone()
 
@@ -340,7 +340,7 @@ def retrieve_book(isbn):
 
         if action == "add_review":
             try:
-                rating = int(request.form.get("rating"))
+                rating = float(request.form.get("rating"))
 
                 # Check if the rating is within the valid range (1 to 10)
                 if rating < 1 or rating > 10:
