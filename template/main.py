@@ -47,19 +47,6 @@ def get_db_connection():
     )
     return conn
 
-# Get all items from the "items" table of the db (Jordan's example code)
-# def get_all_items():
-#     # Create a new database connection for each request
-#     conn = get_db_connection()  # Create a new database connection
-#     cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
-#     # Query the db
-#     query = "SELECT name, quantity FROM items"
-#     cursor.execute(query)
-#     # Get result and close
-#     result = cursor.fetchall() # Gets result from query
-#     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
-#     return result
-
 def get_random_books():
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -123,12 +110,25 @@ def get_list_info(id):
 def get_book_details(isbn):
     conn = get_db_connection()
     cursor = conn.cursor()
-    #FIXME - view only has 1 book currently, so change this
-    query = "SELECT * FROM bookview WHERE isbn = %s"
-    cursor.execute(query, (isbn,))
+
+    # First, fetch the necessary details using the ISBN
+    query_isbn = "SELECT isbn, booktitle, authorfname, authorlname, datepublished, pagecount FROM book WHERE isbn = %s"
+    cursor.execute(query_isbn, (isbn,))
     book_details = cursor.fetchone()
+
+    if book_details:
+        # If book details are found, fetch additional details from the bookview
+        query_additional = "SELECT averagereview FROM bookview WHERE isbn = %s"
+        cursor.execute(query_additional, (isbn,))
+        additional_details = cursor.fetchone()
+
+        if additional_details:
+            # Merge additional details into the book_details dictionary
+            book_details += additional_details
+
     conn.close()
     return book_details
+
 
 def get_searched_books(search_term):
     conn = get_db_connection()
@@ -231,14 +231,11 @@ def deletelist():
         return redirect(url_for("retrieve_shelf"))
       
     
-# # Get request for bookView
 @app.route("/bookview/<isbn>", methods=["GET"])
 def retrieve_book(isbn):
     book_details = get_book_details(isbn)
-    url=request.base_url
-    # Just grab the domain, not anything including a slash or afterwards (for local only, won't work on server b/c htts:// #FIXME)
-    url = url.split("/")[0]
-    return render_template("bookview.html", book_details=book_details, url=url)
+    user_lists = get_user_shelf_view() 
+    return render_template("bookview.html", book_details=book_details, user_lists=user_lists)
 
 @app.route("/book", methods=["GET"])
 def retrieve_random_book(): 

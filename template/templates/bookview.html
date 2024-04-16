@@ -30,13 +30,37 @@
     <div class="book-details">
         <h1>Book Details</h1>
         <div>
-            <!-- Display each detail of the book -->
+        <!-- Display each detail of the book -->
             <p>ISBN: {{ book_details[0] }}</p>
             <p>Title: {{ book_details[1] }}</p>
             <p>Author: {{ book_details[2] }} {{ book_details[3] }}</p>
             <p>Date Published: {{ book_details[4] }}</p>
             <p>Page Count: {{ book_details[5] }}</p>
             <p>Average Review: {{ book_details[6] }}</p>
+            
+            <!-- Form for adding/removing review -->
+            <form action="/add_review" method="post">
+                <input type="hidden" name="book_id" value="{{ book_details.id }}">
+                <button type="submit">Add Review</button>
+            </form>
+            
+            <!-- Form for adding/removing tags -->
+            <form action="/add_tag" method="post">
+                <input type="hidden" name="book_id" value="{{ book_details.id }}">
+                <input type="text" name="tag" placeholder="Enter tag">
+                <button type="submit">Add Tag</button>
+            </form>
+            
+            <!-- Form for adding to list -->
+            <form action="/add_to_list" method="post">
+                <input type="hidden" name="book_id" value="{{ book_details.id }}">
+                <select name="list_id">
+                    {% for list in user_lists %}
+                        <option value="{{ list.id }}">{{ list.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Add to List</button>
+            </form>
         </div>
     </div>
 </body>
