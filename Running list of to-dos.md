@@ -11,10 +11,10 @@ Current wave:
 - ~~Update documentation to be all lowercase (Taylor)~~
 - ~~Update all functions, variables, etc to be all lowercase (Taylor)~~
 - ~~Update userListView (Megan)~~
-- Get the main components of these pages working and finished on our machines:
+- ~~Get the main components of these pages working and finished on our machines:~~
   - ~~Welcome, Search (Taylor)~~
-  - ~~Home page,~~ book view (Katherine)
-        - Book view includes book info, average review, tags, add/remove your reivew, add/remove your tags, add to a list
+  - ~~Home page,~~ ~~book view (Katherine)~~
+        - ~~Book view includes book info, average review, tags, add/remove your reivew, add/remove your tags, add to a list~~
   - ~~User shelf, list view(Megan)~~
   - ~~Create an account page~~
   - ~~Site navigation bar (Taylor)~~
