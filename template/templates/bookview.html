@@ -38,23 +38,22 @@
             <p>Page Count: {{ book_details[5] }}</p>
             <p>Average Review: {{ book_details[6] }}</p>
             
-            <!-- Form for adding a review -->
-            <form action="/bookview/{{ book_details.isbn }}" method="post">
-                <input type="hidden" name="action" value="add_review">
-                <input type="text" name="review" placeholder="Enter review">
+            <!-- Form for adding/removing review -->
+            <form action="/add_review" method="post">
+                <input type="hidden" name="book_id" value="{{ book_details.id }}">
                 <button type="submit">Add Review</button>
             </form>
             
-            <!-- Form for adding a tag -->
-            <form action="/bookview/{{ book_details.isbn }}" method="post">
-                <input type="hidden" name="action" value="add_tag">
+            <!-- Form for adding/removing tags -->
+            <form action="/add_tag" method="post">
+                <input type="hidden" name="book_id" value="{{ book_details.id }}">
                 <input type="text" name="tag" placeholder="Enter tag">
                 <button type="submit">Add Tag</button>
             </form>
             
-            <!-- Form for adding to user's list -->
-            <form action="/bookview/{{ book_details.isbn }}" method="post">
-                <input type="hidden" name="action" value="add_to_list">
+            <!-- Form for adding to list -->
+            <form action="/add_to_list" method="post">
+                <input type="hidden" name="book_id" value="{{ book_details.id }}">
                 <select name="list_id">
                     {% for list in user_lists %}
                         <option value="{{ list.id }}">{{ list.name }}</option>
