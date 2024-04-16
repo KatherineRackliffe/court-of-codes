@@ -49,6 +49,10 @@ nav ul li a {
   margin-left: 10px;
 }
 
+nav ul li.logout {
+  float: right; 
+}
+
 
 /* Link Styles */
 a {
