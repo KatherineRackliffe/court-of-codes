@@ -103,7 +103,7 @@ def get_list_info(user_id):
     query = "SELECT listid, listname FROM userlist WHERE userid = %s"
     cursor.execute(query, (user_id,))
     # Get result and close
-    result = cursor.fetchall() # Gets result from query
+    result = cursor.fetchone() # Gets result from query
     conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
     return result
 
