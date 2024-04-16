@@ -41,7 +41,7 @@
             <!-- Display tags for the book -->
             <p>Tags:</p>
             <ul>
-                {% for tag in book_tags %}
+                {% for tag in tags %}
                     <li>{{ tag }}</li>
                 {% endfor %}
             </ul>
@@ -66,9 +66,9 @@
                 <input type="hidden" name="action" value="add_to_list">
                 <select name="list_id">
                     {% for list in user_lists %}
-                        <option value="{{ list.id }}">{{ list.name }}</option>
+                        <option value="{{ list[0] }}">{{ list[1] }}</option>
                     {% endfor %}
-                </select>
+                </select>                
                 <button type="submit">Add to List</button>
             </form>
         </div>

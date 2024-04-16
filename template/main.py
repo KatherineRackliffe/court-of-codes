@@ -192,50 +192,71 @@ def add_review_to_database(isbn, rating):
     conn.close()
 
 
-# Add tag to database
-def add_tag_to_database(isbn, tag):
+def add_tag_to_database(tagname, isbn):
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # Check if the tag already exists for the book
-    query_check = "SELECT 1 FROM usertag WHERE isbn = %s AND userid = %s AND tagname = %s"
-    cursor.execute(query_check, (isbn, session["userid"], tag))
-    existing_tag = cursor.fetchone()
+    try:
+        # Retrieve userid from the session
+        userid = session.get("userid")
+        if not userid:
+            print("User ID not found in session.")
+            return
 
-    if existing_tag:
-        # If the tag already exists, do nothing (or optionally update it)
-        pass
-    else:
-        # If the tag doesn't exist, insert it
-        query_insert = "INSERT INTO usertag (tagname, userid, isbn) VALUES (%s, %s, %s)"
-        cursor.execute(query_insert, (tag, session["userid"], isbn))
+        # Check if the tag already exists for the book
+        query_check = "SELECT 1 FROM usertag WHERE isbn = %s AND userid = %s AND tagname = %s"
+        cursor.execute(query_check, (isbn, userid, tagname))
+        existing_tag = cursor.fetchone()
 
-    conn.commit()
-    conn.close()
+        if existing_tag:
+            # If the tag already exists, update it
+            query_update = "UPDATE usertag SET updated_at = CURRENT_TIMESTAMP WHERE isbn = %s AND userid = %s AND tagname = %s"
+            cursor.execute(query_update, (isbn, userid, tagname))
+            print("Tag already exists. Updated timestamp.")
+        else:
+            # If the tag doesn't exist, insert it
+            query_insert = "INSERT INTO usertag (tagname, userid, isbn) VALUES (%s, %s, %s)"
+            cursor.execute(query_insert, (tagname, userid, isbn))
+            print("New tag added successfully.")
+
+        conn.commit()
+    except Exception as e:
+        # Handle any errors that occur during the insertion
+        print("Error inserting tag:", e)
+        conn.rollback()  # Rollback changes if an error occurs
+    finally:
+        conn.close()
+
 
 
 # Add book to list in the database
 def add_book_to_list(isbn, list_id):
+    if list_id is None or list_id == "":
+        # Handle the case where list_id is not provided or is empty
+        print("Error: list_id is not provided or is empty")
+        return
+
     conn = get_db_connection()
     cursor = conn.cursor()
     query = "INSERT INTO bookinlist (isbn, listid) VALUES (%s, %s)"
     cursor.execute(query, (isbn, list_id))
     conn.commit()
     conn.close()
+
     
 def get_tags_for_book(isbn):
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
-        query = "SELECT tag FROM usertag WHERE isbn = %s"
+        query = "SELECT tagname FROM usertag WHERE isbn = %s"
         cursor.execute(query, (isbn,))
         tags = [tag[0] for tag in cursor.fetchall()]
+        print("Tags for book with ISBN", isbn, ":", tags)  # Debug print statement
         conn.close()
         return tags
     except Exception as e:
         print("Error fetching tags for book:", e)
         return []
-
 
 # ------------------------ END FUNCTIONS ------------------------ #
 
@@ -319,7 +340,7 @@ def retrieve_book(isbn):
 
         elif action == "add_tag":
             tag = request.form.get("tag")
-            add_tag_to_database(isbn, tag)
+            add_tag_to_database(tag, isbn)
 
         elif action == "add_to_list":
             list_id = request.form.get("list_id")
@@ -328,9 +349,14 @@ def retrieve_book(isbn):
         return redirect(url_for("retrieve_book", isbn=isbn))
 
     book_details = get_book_details(isbn)
-    tags = get_tags_for_book(isbn)  # New function to retrieve tags associated with the book
-    return render_template("bookview.html", book_details=book_details, tags=tags)
+    tags = get_tags_for_book(isbn)
+    user_lists = get_list_info(session.get("userid"))  # Fetch user's lists using user id
 
+    # Check if user_lists is None, and if so, provide an empty list instead
+    if user_lists is None:
+        user_lists = []
+
+    return render_template("bookview.html", book_details=book_details, tags=tags, user_lists=user_lists)
 
 
 @app.route("/book", methods=["GET"])
