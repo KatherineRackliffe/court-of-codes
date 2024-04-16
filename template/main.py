@@ -267,27 +267,6 @@ def home():
     recommended_books = get_random_books()
     return render_template("home.html", recommended_books=recommended_books) # Return the page to be rendered
 
-# EXAMPLE OF POST REQUEST
-# @app.route("/new-item", methods=["POST"])
-# def add_item():
-#     try:
-#         # Get items from the form
-#         data = request.form
-#         item_name = data["name"] # This is defined in the input element of the HTML form on index.html
-#         item_quantity = data["quantity"] # This is defined in the input element of the HTML form on index.html
-
-#         # TODO: Insert this data into the database
-        
-#         # Send message to page. There is code in index.html that checks for these messages
-#         flash("Item added successfully", "success")
-#         # Redirect to home. This works because the home route is named home in this file
-#         return redirect(url_for("home"))
-
-#     # If an error occurs, this code block will be called
-#     except Exception as e:
-#         flash(f"An error occurred: {str(e)}", "error") # Send the error message to the web page
-#         return redirect(url_for("home")) # Redirect to home
-
 # Log users in
 @app.route('/login', methods=['GET', 'POST'])
 @login_exempt
@@ -424,4 +403,3 @@ def hash_password(password, salt=None):
 # listen on port 8080
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True) # TODO: Students PLEASE remove debug=True when you deploy this for production!!!!!
-    
