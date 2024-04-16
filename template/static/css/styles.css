@@ -162,3 +162,29 @@ img {
   border-radius: 5px;
   cursor: pointer;
 }
+.add-to-list button {
+  padding: 10px 20px;
+  background-color: #33b3a6;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tag button {
+  padding: 10px 20px;
+  background-color: #33b3a6;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.review button {
+  padding: 10px 20px;
+  background-color: #33b3a6;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

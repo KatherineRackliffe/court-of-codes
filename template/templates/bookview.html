@@ -40,28 +40,32 @@
             <p>Average Review: {{ book_details[6] }}</p>
             
             <!-- Form for adding/removing review -->
-            <form action="/add_review" method="post">
-                <input type="hidden" name="book_id" value="{{ book_details.id }}">
-                <button type="submit">Add Review</button>
-            </form>
-            
+            <div class="review">
+                <form action="/add_review" method="post">
+                    <input type="hidden" name="book_id" value="{{ book_details.id }}">
+                    <button type="submit">Add Review</button>
+                </form>
+            </div>
             <!-- Form for adding/removing tags -->
-            <form action="/add_tag" method="post">
-                <input type="hidden" name="book_id" value="{{ book_details.id }}">
-                <input type="text" name="tag" placeholder="Enter tag">
-                <button type="submit">Add Tag</button>
-            </form>
-            
+            <div class="tag">
+                <form action="/add_tag" method="post">
+                    <input type="hidden" name="book_id" value="{{ book_details.id }}">
+                    <input type="text" name="tag" placeholder="Enter tag">
+                    <button type="submit">Add Tag</button>
+                </form>
+            </div>
             <!-- Form for adding to list -->
-            <form action="/add_to_list" method="post">
-                <input type="hidden" name="book_id" value="{{ book_details.id }}">
-                <select name="list_id">
-                    {% for list in user_lists %}
-                        <option value="{{ list.id }}">{{ list.name }}</option>
-                    {% endfor %}
-                </select>
-                <button type="submit">Add to List</button>
-            </form>
+            <div class="add-to-list">
+                <form action="/add_to_list" method="post">
+                    <input type="hidden" name="book_id" value="{{ book_details.id }}">
+                    <select name="list_id">
+                        {% for list in user_lists %}
+                            <option value="{{ list.id }}">{{ list.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Add to List</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>
