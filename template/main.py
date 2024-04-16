@@ -170,23 +170,49 @@ def delete_old_list(old_list_id):
     return query
 
 
-# Add review to database
-def add_review_to_database(isbn, review):
+def add_review_to_database(isbn, rating):
     conn = get_db_connection()
     cursor = conn.cursor()
-    query = "INSERT INTO reviews (isbn, review) VALUES (%s, %s)"
-    cursor.execute(query, (isbn, review))
+
+    # Check if a review from the same user for the same book already exists
+    query_check = "SELECT 1 FROM userreview WHERE userid = %s AND isbn = %s"
+    cursor.execute(query_check, (session["userid"], isbn))
+    existing_review = cursor.fetchone()
+
+    if existing_review:
+        # If a review already exists, update it instead of inserting a new one
+        query_update = "UPDATE userreview SET numericalreview = %s WHERE userid = %s AND isbn = %s"
+        cursor.execute(query_update, (rating, session["userid"], isbn))
+    else:
+        # If no existing review found, insert a new one
+        query_insert = "INSERT INTO userreview (numericalreview, userid, isbn) VALUES (%s, %s, %s)"
+        cursor.execute(query_insert, (rating, session["userid"], isbn))
+
     conn.commit()
     conn.close()
+
 
 # Add tag to database
 def add_tag_to_database(isbn, tag):
     conn = get_db_connection()
     cursor = conn.cursor()
-    query = "INSERT INTO tags (isbn, tag) VALUES (%s, %s)"
-    cursor.execute(query, (isbn, tag))
+
+    # Check if the tag already exists for the book
+    query_check = "SELECT 1 FROM usertag WHERE isbn = %s AND userid = %s AND tagname = %s"
+    cursor.execute(query_check, (isbn, session["userid"], tag))
+    existing_tag = cursor.fetchone()
+
+    if existing_tag:
+        # If the tag already exists, do nothing (or optionally update it)
+        pass
+    else:
+        # If the tag doesn't exist, insert it
+        query_insert = "INSERT INTO usertag (tagname, userid, isbn) VALUES (%s, %s, %s)"
+        cursor.execute(query_insert, (tag, session["userid"], isbn))
+
     conn.commit()
     conn.close()
+
 
 # Add book to list in the database
 def add_book_to_list(isbn, list_id):
@@ -196,6 +222,20 @@ def add_book_to_list(isbn, list_id):
     cursor.execute(query, (isbn, list_id))
     conn.commit()
     conn.close()
+    
+def get_tags_for_book(isbn):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        query = "SELECT tag FROM usertag WHERE isbn = %s"
+        cursor.execute(query, (isbn,))
+        tags = [tag[0] for tag in cursor.fetchall()]
+        conn.close()
+        return tags
+    except Exception as e:
+        print("Error fetching tags for book:", e)
+        return []
+
 
 # ------------------------ END FUNCTIONS ------------------------ #
 
@@ -261,28 +301,37 @@ def deletelist():
     
 @app.route("/bookview/<isbn>", methods=["GET", "POST"])
 def retrieve_book(isbn):
-    book_details = get_book_details(isbn)
-    #user_lists = get_user_lists()  # Assuming you have a function to get user's lists
-
     if request.method == "POST":
-        action = request.form["action"]
+        action = request.form.get("action")
 
         if action == "add_review":
-            review = request.form["review"]
-            add_review_to_database(isbn, review)
+            try:
+                rating = int(request.form.get("rating"))
+
+                # Check if the rating is within the valid range (1 to 10)
+                if rating < 1 or rating > 10:
+                    flash("Rating must be between 1 and 10", "error")
+                else:
+                    add_review_to_database(isbn, rating)
+                    flash("Review added successfully", "success")
+            except ValueError:
+                flash("Invalid rating format", "error")
 
         elif action == "add_tag":
-            tag = request.form["tag"]
+            tag = request.form.get("tag")
             add_tag_to_database(isbn, tag)
 
         elif action == "add_to_list":
-            list_id = request.form["list_id"]
+            list_id = request.form.get("list_id")
             add_book_to_list(isbn, list_id)
 
-        # Redirect back to the bookview page after processing the form
         return redirect(url_for("retrieve_book", isbn=isbn))
 
-    return render_template("bookview.html", book_details=book_details)
+    book_details = get_book_details(isbn)
+    tags = get_tags_for_book(isbn)  # New function to retrieve tags associated with the book
+    return render_template("bookview.html", book_details=book_details, tags=tags)
+
+
 
 @app.route("/book", methods=["GET"])
 def retrieve_random_book(): 

@@ -30,30 +30,40 @@
     <div class="book-details">
         <h1>Book Details</h1>
         <div>
-        <!-- Display each detail of the book -->
+            <!-- Display each detail of the book -->
             <p>ISBN: {{ book_details[0] }}</p>
             <p>Title: {{ book_details[1] }}</p>
             <p>Author: {{ book_details[2] }} {{ book_details[3] }}</p>
             <p>Date Published: {{ book_details[4] }}</p>
             <p>Page Count: {{ book_details[5] }}</p>
             <p>Average Review: {{ book_details[6] }}</p>
+
+            <!-- Display tags for the book -->
+            <p>Tags:</p>
+            <ul>
+                {% for tag in book_tags %}
+                    <li>{{ tag }}</li>
+                {% endfor %}
+            </ul>
             
-            <!-- Form for adding/removing review -->
-            <form action="/add_review" method="post">
-                <input type="hidden" name="book_id" value="{{ book_details.id }}">
+            <!-- Form for adding review -->
+            <form action="/bookview/{{ book_details[0] }}" method="post">
+                <input type="hidden" name="action" value="add_review">
+                <label for="rating">Rating (1-10):</label>
+                <input type="number" name="rating" id="rating" min="1" max="10" required>
                 <button type="submit">Add Review</button>
             </form>
             
-            <!-- Form for adding/removing tags -->
-            <form action="/add_tag" method="post">
-                <input type="hidden" name="book_id" value="{{ book_details.id }}">
+            <!-- Form for adding tag -->
+            <form action="/bookview/{{ book_details[0] }}" method="post">
+                <input type="hidden" name="action" value="add_tag">
                 <input type="text" name="tag" placeholder="Enter tag">
                 <button type="submit">Add Tag</button>
             </form>
             
             <!-- Form for adding to list -->
-            <form action="/add_to_list" method="post">
-                <input type="hidden" name="book_id" value="{{ book_details.id }}">
+            <form action="/bookview/{{ book_details[0] }}" method="post">
+                <input type="hidden" name="action" value="add_to_list">
                 <select name="list_id">
                     {% for list in user_lists %}
                         <option value="{{ list.id }}">{{ list.name }}</option>
