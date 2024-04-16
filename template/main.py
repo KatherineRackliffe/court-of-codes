@@ -173,7 +173,6 @@ def delete_old_list(old_list_id):
 
 
 # ------------------------ BEGIN ROUTES ------------------------ #
-
 # Get request for listView 
 @app.route("/shelf/list/<id>", methods=['GET'])
 # FIXME only allow to work for logged in user w/ try catch
@@ -263,12 +262,10 @@ def retrive_search():
         results = get_searched_books(search_term)
         return render_template('results.html', results=results)
 
-
-# # EXAMPLE OF GET REQUEST
-# @app.route("/", methods=["GET"])
-# def home():
-#     recommended_books = get_random_books()
-#     return render_template("home.html", recommended_books=recommended_books) # Return the page to be rendered
+@app.route("/", methods=["GET"])
+def home():
+    recommended_books = get_random_books()
+    return render_template("home.html", recommended_books=recommended_books) # Return the page to be rendered
 
 # EXAMPLE OF POST REQUEST
 # @app.route("/new-item", methods=["POST"])
