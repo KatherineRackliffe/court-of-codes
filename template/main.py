@@ -143,7 +143,7 @@ def get_book_details(isbn):
     return book_details
 
 
-def get_searched_books(search_term):
+def get_searched_books(search_term): 
     conn = get_db_connection()
     cursor = conn.cursor()
     query = "SELECT isbn, booktitle, authorfname, authorlname FROM book WHERE booktitle ILIKE %s OR authorfname ILIKE %s OR authorlname ILIKE %s OR isbn ILIKE %s"
@@ -332,7 +332,8 @@ def deletelist():
         flash(f"An error occurred: {str(e)}", "error") # Send the error message to the web page
         return redirect(url_for("retrieve_shelf"))
       
-    
+ 
+#The view for an individual book   
 @app.route("/bookview/<isbn>", methods=["GET", "POST"])
 def retrieve_book(isbn):
     if request.method == "POST":
@@ -374,6 +375,7 @@ def retrieve_book(isbn):
     return render_template("bookview.html", book_details=book_details, tags=tags, user_lists=user_lists)
 
 
+#A testing page 
 @app.route("/book", methods=["GET"])
 def retrieve_random_book(): 
     random_book = retrieve_random_book_details()
@@ -396,6 +398,7 @@ def retrive_search():
         results = get_searched_books(search_term)
         return render_template('results.html', results=results)
 
+#routes the main page to home
 @app.route("/", methods=["GET"])
 def home():
     recommended_books = get_random_books()
