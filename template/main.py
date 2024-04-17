@@ -56,18 +56,6 @@ def get_random_books():
     conn.close()
     return recommended_books
 
-def get_user_info():
-    # Create a new database connection for each request
-    conn = get_db_connection()  # Create a new database connection
-    cursor = conn.cursor() # Creates a cursor for the connection, you need this to do queries
-    # Query the db
-    query = "SELECT username, userid FROM welcomepageview"
-    cursor.execute(query)
-    # Get result and close
-    result = cursor.fetchall() # Gets result from query
-    conn.close() # Close the db connection (NOTE: You should do this after each query, otherwise your database may become locked)
-    return result
-
 # Get the User Shelf View
 def get_user_shelf_view():
     # Create a new database connection for each request
